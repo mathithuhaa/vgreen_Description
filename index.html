@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VGreen - Cổng Thông Tin & Tài Liệu Đặc Tả Hệ Thống TMĐT Nông Sản Sạch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vgreen: {
+              50: '#F3FAF0',
+              100: '#E2F4DC',
+              200: '#C2E8B7',
+              300: '#99D788',
+              400: '#68C053',
+              500: '#3CB018',
+              600: '#349409',
+              700: '#2A7508',
+              800: '#215B0A',
+              900: '#143805',
+              dark: '#0F2606'
+            },
+            vgold: {
+              100: '#FFF8E1',
+              400: '#FDD835',
+              500: '#F2BF3D',
+              600: '#E0A820'
+            },
+            vgray: {
+              50: '#FAFBF8',
+              100: '#F2F3ED',
+              200: '#E5E7DF',
+              300: '#D1D5C8',
+              700: '#4A5043',
+              800: '#2B3125',
+              900: '#1A2016'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'SF Pro Display', 'sans-serif'],
+            body: ['Lexend', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: #FAFBF8;
+      color: #1A2016;
+    }
+    h1, h2, h3, h4, h5, h6, .heading-font {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #F2F3ED;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #349409;
+      border-radius: 9999px;
+    }
+    .glass-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px -10px rgba(52, 148, 9, 0.15);
+    }
+    .modal-backdrop {
+      background: rgba(15, 38, 6, 0.85);
+      backdrop-filter: blur(6px);
+    }
+    .sidebar-link.active {
+      background-color: #E2F4DC;
+      color: #215B0A;
+      font-weight: 700;
+      border-left: 3px solid #349409;
+    }
+  </style>
+</head>
+<body class="bg-vgray-50 text-vgray-900 antialiased selection:bg-vgreen-500 selection:text-white flex flex-col min-h-screen">
+
+  <!-- ================= MOBILE OVERLAY ================= -->
+  <div id="mobileSidebarBackdrop" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity" onclick="toggleSidebar()"></div>
+
+  <!-- ================= SIDEBAR NAVIGATION ================= -->
+  <aside id="mainSidebar" class="fixed top-0 bottom-0 left-0 z-50 w-72 sm:w-80 bg-white border-r border-vgray-200 flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-xl lg:shadow-none">
+    
+    <!-- Sidebar Header & Brand Logo -->
+    <div class="p-4 border-b border-vgray-200/80 bg-gradient-to-r from-vgray-50 to-white flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-vgreen-600 to-vgreen-400 flex items-center justify-center text-white shadow-md shadow-vgreen-600/20">
+          <i data-lucide="sprout" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-1.5">
+            <span class="text-lg font-extrabold text-vgreen-700 tracking-tight">VGreen</span>
+            <span class="px-1.5 py-0.5 text-[10px] font-bold bg-vgreen-100 text-vgreen-800 rounded border border-vgreen-300">Official Docs</span>
+          </div>
+          <p class="text-[11px] text-vgray-500 font-medium">Hệ Thống TMĐT Nông Sản Sạch</p>
+        </div>
+      </div>
+      <!-- Close button on mobile -->
+      <button onclick="toggleSidebar()" class="lg:hidden p-1.5 rounded-lg text-vgray-500 hover:bg-vgray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Live Website Banner Button (Prominent Call-To-Action) -->
+    <div class="p-3 border-b border-vgray-200 bg-gradient-to-br from-vgreen-900 via-vgreen-800 to-vgreen-950 text-white">
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="inline-flex items-center space-x-1 text-[10px] font-bold uppercase tracking-wider text-vgold-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-0.5"></span>
+          Website Đang Hoạt Động
+        </span>
+        <span class="text-[10px] text-vgreen-300 font-mono">v1.0 Live</span>
+      </div>
+      <a href="https://vgreenadmin.vercel.app/home" target="_blank" rel="noopener noreferrer" 
+        class="w-full py-2 px-3 bg-gradient-to-r from-vgreen-500 to-vgreen-600 hover:from-vgreen-400 hover:to-vgreen-500 text-white rounded-xl text-xs font-bold transition shadow-md shadow-vgreen-900/40 flex items-center justify-center space-x-2 group">
+        <span>Trải Nghiệm Web Khách Hàng</span>
+        <i data-lucide="external-link" class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+      </a>
+      <p class="text-[10px] text-vgreen-200/70 mt-1.5 text-center font-mono truncate">
+        https://vgreenadmin.vercel.app/home
+      </p>
+    </div>
+
+    <!-- Quick Search in Sidebar -->
+    <div class="p-3 border-b border-vgray-100 bg-vgray-50/50">
+      <div class="relative">
+        <i data-lucide="search" class="w-3.5 h-3.5 text-vgray-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+        <input type="text" id="sidebarSearch" onkeyup="filterDocsContent(this.value)" placeholder="Tìm kiếm tính năng, quy trình..." 
+          class="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-vgray-200 rounded-lg focus:outline-none focus:border-vgreen-500 focus:bg-white transition text-vgray-800 placeholder-vgray-400">
+      </div>
+    </div>
+
+    <!-- Navigation Menu Items with Exact Anchor Links -->
+    <nav class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-4 text-xs font-medium">
+      
+      <!-- Module 1: BRD -->
+      <div>
+        <a href="#brd" class="sidebar-link flex items-center justify-between px-3 py-2 rounded-lg text-vgray-800 hover:bg-vgreen-50 hover:text-vgreen-800 transition">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="briefcase" class="w-4 h-4 text-vgreen-600 flex-shrink-0"></i>
+            <span class="font-bold">1. Yêu Cầu Kinh Doanh (BRD)</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-vgreen-100 text-vgreen-800 font-mono">BRD</span>
+        </a>
+        <div class="ml-6 pl-2.5 border-l border-vgray-200 space-y-1 mt-1 text-[11px] text-vgray-600">
+          <a href="#brd-context" class="block py-1 hover:text-vgreen-700 transition">1.1 Bối Cảnh Thị Trường</a>
+          <a href="#brd-barriers" class="block py-1 hover:text-vgreen-700 transition">1.2 Rào Cản & Thách Thức</a>
+          <a href="#brd-vision" class="block py-1 hover:text-vgreen-700 transition">1.3 Tầm Nhìn & 4 Giá Trị</a>
+          <a href="#brd-goals" class="block py-1 hover:text-vgreen-700 transition">1.4 Mục Tiêu 3 Giai Đoạn</a>
+          <a href="#brd-products" class="block py-1 hover:text-vgreen-700 transition">1.5 4 Nhóm SP & 5 Tiêu Chuẩn</a>
+          <a href="#brd-personas" class="block py-1 hover:text-vgreen-700 transition">1.6 Chân Dung Khách Hàng</a>
+          <a href="#brd-competitors" class="block py-1 hover:text-vgreen-700 transition">1.7 Ma Trận Đối Thủ Cạnh Tranh</a>
+        </div>
+      </div>
+
+      <!-- Module 2: SRS / FSD -->
+      <div>
+        <a href="#srs" class="sidebar-link flex items-center justify-between px-3 py-2 rounded-lg text-vgray-800 hover:bg-blue-50 hover:text-blue-800 transition">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="layers" class="w-4 h-4 text-blue-600 flex-shrink-0"></i>
+            <span class="font-bold">2. Kiến Trúc & Quy Trình (SRS)</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-mono">SRS</span>
+        </a>
+        <div class="ml-6 pl-2.5 border-l border-vgray-200 space-y-1 mt-1 text-[11px] text-vgray-600">
+          <a href="#srs-sitemap" class="block py-1 hover:text-blue-700 transition">2.1 Kiến Trúc Sitemap Hệ Thống</a>
+          <a href="#srs-usecases" class="block py-1 hover:text-blue-700 transition">2.2 4 Tác Nhân & 10 Use Case</a>
+          <a href="#srs-bpmn" class="block py-1 hover:text-blue-700 transition">2.3 12 Quy Trình Nghiệp Vụ BPMN</a>
+          <a href="#srs-rules" class="block py-1 hover:text-blue-700 transition">2.4 Bộ 5 Business Rules Cốt Lõi</a>
+        </div>
+      </div>
+
+      <!-- Module 3: Functional Requirements (FR) -->
+      <div>
+        <a href="#fr" class="sidebar-link flex items-center justify-between px-3 py-2 rounded-lg text-vgray-800 hover:bg-amber-50 hover:text-amber-800 transition">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="check-square" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
+            <span class="font-bold">3. Yêu Cầu Chức Năng (FR)</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 font-mono">20 Chức Năng</span>
+        </a>
+        <div class="ml-6 pl-2.5 border-l border-vgray-200 space-y-1 mt-1 text-[11px] text-vgray-600">
+          <a href="#fr-user" class="block py-1 hover:text-amber-700 transition">3.1 Phân Hệ Người Dùng (FR 01–11)</a>
+          <a href="#fr-admin" class="block py-1 hover:text-amber-700 transition">3.2 Phân Hệ Quản Trị (FR 12–20)</a>
+          <a href="#fr-matrix" class="block py-1 hover:text-amber-700 transition">3.3 Luồng Dữ Liệu Input/Output</a>
+        </div>
+      </div>
+
+      <!-- Module 4: NFR -->
+      <div>
+        <a href="#nfr" class="sidebar-link flex items-center justify-between px-3 py-2 rounded-lg text-vgray-800 hover:bg-purple-50 hover:text-purple-800 transition">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-purple-600 flex-shrink-0"></i>
+            <span class="font-bold">4. Tiêu Chuẩn Kỹ Thuật (NFR)</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-50 text-purple-700 font-mono">NFR</span>
+        </a>
+        <div class="ml-6 pl-2.5 border-l border-vgray-200 space-y-1 mt-1 text-[11px] text-vgray-600">
+          <a href="#nfr-performance" class="block py-1 hover:text-purple-700 transition">4.1 Tốc Độ Tải Trang &lt; 3s</a>
+          <a href="#nfr-security" class="block py-1 hover:text-purple-700 transition">4.2 Bảo Mật PasswordHash & SSL 256</a>
+          <a href="#nfr-compliance" class="block py-1 hover:text-purple-700 transition">4.3 Nghị Định 13/2023 & An Toàn Mạng</a>
+          <a href="#nfr-architecture" class="block py-1 hover:text-purple-700 transition">4.4 Kiến Trúc Angular + Node + Mongo</a>
+        </div>
+      </div>
+
+      <!-- Module 5: UI/UX & Wireframes -->
+      <div>
+        <a href="#uiux" class="sidebar-link flex items-center justify-between px-3 py-2 rounded-lg text-vgray-800 hover:bg-emerald-50 hover:text-emerald-800 transition">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="layout-grid" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
+            <span class="font-bold">5. Giao Diện & Wireframes</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 font-mono">27 Màn Hình</span>
+        </a>
+        <div class="ml-6 pl-2.5 border-l border-vgray-200 space-y-1 mt-1 text-[11px] text-vgray-600">
+          <a href="#uiux-design-system" class="block py-1 hover:text-emerald-700 transition">5.1 Design System & Typography</a>
+          <a href="#uiux-user-screens" class="block py-1 hover:text-emerald-700 transition">5.2 19 Màn Hình Khách Hàng</a>
+          <a href="#uiux-admin-screens" class="block py-1 hover:text-emerald-700 transition">5.3 8 Màn Hình Quản Trị Hệ Thống</a>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="p-3 border-t border-vgray-200 text-center text-[10px] text-vgray-500 bg-vgray-50">
+      <p class="font-bold text-vgreen-700">VGreen • Chuẩn Vị Xanh - Trọn Vị Ngon</p>
+      <p class="text-[10px] text-vgray-400 mt-0.5">Hệ thống thương mại điện tử nông sản</p>
+    </div>
+  </aside>
+
+  <!-- ================= TOP BAR & MAIN CONTENT WRAPPER ================= -->
+  <div class="lg:pl-72 sm:lg:pl-80 flex flex-col flex-1 transition-all">
+
+    <!-- Top Sticky Header -->
+    <header class="glass-header sticky top-0 z-30 border-b border-vgray-200 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 py-2.5 flex items-center justify-between">
+        
+        <!-- Mobile Toggle Button -->
+        <div class="flex items-center space-x-3">
+          <button onclick="toggleSidebar()" class="lg:hidden p-2 text-vgray-700 hover:text-vgreen-700 hover:bg-vgreen-50 rounded-lg transition" title="Mở danh mục">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+          
+          <div class="hidden sm:flex items-center space-x-2">
+            <span class="text-xs font-bold text-vgray-600 uppercase tracking-wider">Hệ Thống:</span>
+            <span class="text-xs font-bold text-vgreen-800 bg-vgreen-100 px-2.5 py-0.5 rounded-full border border-vgreen-200">VGreen E-Commerce Platform</span>
+          </div>
+        </div>
+
+        <!-- Right Quick Actions -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <a href="https://vgreenadmin.vercel.app/home" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-vgreen-600 to-vgreen-500 hover:from-vgreen-700 hover:to-vgreen-600 shadow-sm shadow-vgreen-600/30 transition transform hover:-translate-y-0.5">
+            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Mở Website Trực Tuyến:</span>
+            <span>vgreenadmin.vercel.app</span>
+            <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+          </a>
+
+          <button onclick="window.print()" class="p-2 text-vgray-600 hover:text-vgreen-700 hover:bg-vgreen-50 rounded-lg transition" title="In / Xuất PDF">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ================= HERO BANNER ================= -->
+    <section class="relative bg-gradient-to-br from-vgreen-900 via-vgreen-800 to-vgreen-950 text-white py-12 px-4 sm:px-8 border-b border-vgreen-700/50 overflow-hidden">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C2E8B7_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      <div class="absolute right-0 -bottom-24 w-80 h-80 bg-vgreen-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-vgreen-700/50 border border-vgreen-500/30 text-vgreen-200 text-xs font-medium mb-3">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-vgold-400"></i>
+              <span>Tài Liệu Đặc Tả Yêu Cầu Kỹ Thuật & Nghiệp Vụ Toàn Diện</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-3">
+              VGreen – Nền Tảng TMĐT <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-vgreen-300 via-vgold-400 to-vgreen-200">Nông Sản Sạch Đô Thị</span>
+            </h1>
+            <p class="text-sm sm:text-base text-vgreen-100/90 font-light max-w-2xl leading-relaxed mb-5">
+              Hệ sinh thái số hóa nông sản chuẩn vị ngon từ vườn đến bàn ăn. Tổng hợp hoàn chỉnh 5 trụ cột kỹ thuật: Yêu cầu kinh doanh (BRD), Kiến trúc quy trình (SRS), Yêu cầu chức năng chi tiết (FR), Tiêu chuẩn phi chức năng (NFR) và Thiết kế giao diện (UI/UX).
+            </p>
+            
+            <!-- Quick Links -->
+            <div class="flex flex-wrap items-center gap-2.5 text-xs font-medium">
+              <a href="https://vgreenadmin.vercel.app/home" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-vgold-400 hover:bg-vgold-500 text-vgray-950 font-bold shadow-lg shadow-vgold-400/20 transition transform hover:-translate-y-0.5">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <span>Trải Nghiệm Web Live: https://vgreenadmin.vercel.app/home</span>
+              </a>
+              <span class="inline-flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 text-white">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-vgreen-400"></i>
+                <span>Slogan: "Chuẩn vị xanh - Trọn vị ngon"</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Quick Specs Card -->
+          <div class="lg:col-span-4">
+            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 text-white shadow-xl text-xs sm:text-sm">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3">
+                <h3 class="font-bold tracking-wide uppercase text-vgreen-200 text-xs">Thông Số Vận Hành</h3>
+                <i data-lucide="info" class="w-4 h-4 text-vgreen-300"></i>
+              </div>
+              <dl class="space-y-2.5">
+                <div class="flex justify-between">
+                  <dt class="text-vgreen-200">Cổng truy cập Live:</dt>
+                  <dd class="font-semibold text-right"><a href="https://vgreenadmin.vercel.app/home" target="_blank" class="text-vgold-400 hover:underline">vgreenadmin...</a></dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-vgreen-200">Kiến trúc hệ thống:</dt>
+                  <dd class="font-semibold text-right">Angular SPA + Node.js API</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-vgreen-200">Tốc độ tải trang:</dt>
+                  <dd class="font-semibold text-vgold-400 text-right">&lt; 3 Giây</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-vgreen-200">Chính sách vận chuyển:</dt>
+                  <dd class="font-semibold text-right">Freeship ≥ 200k • Giao 2–4h</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-vgreen-200">Chính sách đổi trả:</dt>
+                  <dd class="font-semibold text-right">24h tươi sống • 7 ngày chế biến</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MAIN CONTENT CONTAINER ================= -->
+    <main class="max-w-6xl w-full mx-auto px-4 sm:px-8 py-10 space-y-20">
+
+      <!-- ================================================================= -->
+      <!-- 1. BUSINESS REQUIREMENTS DOCUMENT (BRD)                           -->
+      <!-- ================================================================= -->
+      <section id="brd" class="scroll-mt-20 space-y-10">
+        <!-- Section Header -->
+        <div class="border-b border-vgray-200 pb-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-vgreen-100 text-vgreen-800 text-xs font-semibold uppercase tracking-wider mb-2">
+            <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+            <span>Tài Liệu Định Hướng • Business Requirements Document</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-vgray-900 tracking-tight">1. Tài Liệu Yêu Cầu Kinh Doanh – BRD</h2>
+          <p class="text-sm sm:text-base text-vgray-600 mt-2 leading-relaxed">
+            Xác định bối cảnh thị trường, bài toán kinh doanh nông sản Việt Nam, định vị thương hiệu VGreen, phạm vi danh mục sản phẩm và mục tiêu chiến lược 3 giai đoạn của dự án.
+          </p>
+        </div>
+
+        <!-- 1.1 Bối Cảnh Thị Trường & Bài Toán Kinh Doanh -->
+        <div id="brd-context" class="scroll-mt-24 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm card-hover">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-vgreen-100 text-vgreen-700 flex items-center justify-center font-bold">
+              <i data-lucide="trending-up" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base text-vgray-900">1.1 Bối Cảnh Thị Trường & Bài Toán Kinh Doanh</h3>
+              <p class="text-xs text-vgray-500">Tốc độ tăng trưởng thương mại điện tử nông sản Việt Nam</p>
+            </div>
+          </div>
+          <div class="space-y-3 text-sm text-vgray-600 leading-relaxed">
+            <p>
+              Theo số liệu từ Bộ Công Thương, doanh thu thương mại điện tử B2C Việt Nam năm 2023 đạt khoảng <strong>20,5 tỷ USD</strong> và tiếp tục bùng nổ vượt mốc <strong>25 tỷ USD năm 2024</strong> (chiếm gần 9% tổng mức bán lẻ hàng hóa cả nước), hướng tới mục tiêu <strong>35 tỷ USD vào năm 2025</strong>.
+            </p>
+            <p>
+              Thương mại điện tử trong lĩnh vực nông sản nổi lên như một hướng phát triển chiến lược để giải quyết bài toán “đầu ra” cho hơn <strong>10 triệu hộ nông dân</strong> trên cả nước, từng bước chuyển dịch từ chợ đầu mối truyền thống sang phân phối số trực tiếp đến người tiêu dùng.
+            </p>
+            <div class="p-3 bg-vgreen-50 rounded-xl border border-vgreen-200 text-xs text-vgreen-800 flex items-center space-x-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-vgreen-600 flex-shrink-0"></i>
+              <span>Xu hướng tiêu dùng xanh: 78% người tiêu dùng đô thị sẵn sàng chi trả mức giá cao hơn cho các sản phẩm nông sản sạch, đạt chuẩn hữu cơ và có nguồn gốc rõ ràng.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.2 Rào Cản & Thách Thức Thực Tế -->
+        <div id="brd-barriers" class="scroll-mt-24 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm card-hover">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
+              <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base text-vgray-900">1.2 Rào Cản & Thách Thức Thực Tế Cần Giải Quyết</h3>
+              <p class="text-xs text-vgray-500">4 Rào cản lớn trong chuỗi cung ứng nông sản</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm text-vgray-600">
+            <div class="flex items-start space-x-2.5 p-3 rounded-lg bg-vgray-50 border border-vgray-200/60">
+              <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
+              <div>
+                <strong class="text-vgray-900">Chuỗi cung ứng lạnh (Cold Chain) hạn chế:</strong> Tỷ lệ thất thoát sau thu hoạch lên đến 20–30% do thiếu hệ thống bảo quản đồng bộ từ vườn đến bàn ăn.
+              </div>
+            </div>
+            <div class="flex items-start space-x-2.5 p-3 rounded-lg bg-vgray-50 border border-vgray-200/60">
+              <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
+              <div>
+                <strong class="text-vgray-900">Bài toán nguồn gốc & chứng nhận:</strong> Tình trạng "đánh tráo khái niệm" nông sản sạch khiến niềm tin người tiêu dùng đô thị bị xói mòn.
+              </div>
+            </div>
+            <div class="flex items-start space-x-2.5 p-3 rounded-lg bg-vgray-50 border border-vgray-200/60">
+              <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
+              <div>
+                <strong class="text-vgray-900">Thương lái ép giá:</strong> Nông dân phụ thuộc vào thương lái trung gian, biên lợi nhuận bấp bênh và không chủ động thị trường tiêu thụ.
+              </div>
+            </div>
+            <div class="flex items-start space-x-2.5 p-3 rounded-lg bg-vgray-50 border border-vgray-200/60">
+              <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
+              <div>
+                <strong class="text-vgray-900">Logistics hàng mau hỏng:</strong> Đòi hỏi thời gian giao hàng cực nhanh (2–4 giờ) nội đô với chi phí vận chuyển tối ưu.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.3 Tầm Nhìn, Sứ Mệnh & 4 Giá Trị Cốt Lõi -->
+        <div id="brd-vision" class="scroll-mt-24 bg-gradient-to-r from-vgreen-50 via-white to-vgreen-50/50 rounded-2xl p-6 sm:p-8 border border-vgreen-200 shadow-sm">
+          <div class="text-center max-w-3xl mx-auto mb-8">
+            <span class="text-xs font-bold tracking-widest text-vgreen-700 uppercase bg-vgreen-100 px-3 py-1 rounded-full">Định Vị Thương Hiệu</span>
+            <h3 class="text-2xl sm:text-3xl font-black text-vgray-900 mt-2">“Chuẩn vị xanh - Trọn vị ngon”</h3>
+            <p class="text-sm text-vgray-600 mt-2">
+              VGreen cam kết mang đến nguồn nông sản an lành chuẩn hữu cơ, gìn giữ trọn vẹn hương vị tự nhiên và kết nối bền vững từ nông hộ đến gia đình đô thị.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-xl border border-vgreen-100 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-full bg-vgreen-100 text-vgreen-700 flex items-center justify-center mb-3">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-sm text-vgray-900 mb-1">Lấy Con Người Làm Trung Tâm</h4>
+              <p class="text-xs text-vgray-600 leading-relaxed">Sức khỏe người tiêu dùng và sinh kế người nông dân là thước đo thành công hàng đầu.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-vgreen-100 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-full bg-vgreen-100 text-vgreen-700 flex items-center justify-center mb-3">
+                <i data-lucide="leaf" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-sm text-vgray-900 mb-1">Gắn Kết Thiên Nhiên</h4>
+              <p class="text-xs text-vgray-600 leading-relaxed">Tôn trọng mùa vụ tự nhiên, thúc đẩy canh tác hữu cơ không phân hóa học độc hại.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-vgreen-100 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-full bg-vgreen-100 text-vgreen-700 flex items-center justify-center mb-3">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-sm text-vgray-900 mb-1">Minh Bạch - Tín Nhiệm</h4>
+              <p class="text-xs text-vgray-600 leading-relaxed">Công khai 100% nhật ký canh tác, vùng trồng và kết quả kiểm định VietGAP/GlobalGAP.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-vgreen-100 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-full bg-vgreen-100 text-vgreen-700 flex items-center justify-center mb-3">
+                <i data-lucide="recycle" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-sm text-vgray-900 mb-1">Phát Triển Bền Vững</h4>
+              <p class="text-xs text-vgray-600 leading-relaxed">Sử dụng bao bì tự hủy sinh học, tối ưu lộ trình xanh để giảm phát thải carbon.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.4 Mục Tiêu Chiến Lược 3 Giai Đoạn -->
+        <div id="brd-goals" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm">
+          <h3 class="font-bold text-lg text-vgray-900 mb-6 flex items-center space-x-2">
+            <i data-lucide="milestone" class="w-5 h-5 text-vgreen-600"></i>
+            <span>1.4 Mục Tiêu Chiến Lược 3 Giai Đoạn Vận Hành</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+            <!-- Short-term -->
+            <div class="p-5 rounded-xl bg-vgreen-50/60 border border-vgreen-200 relative card-hover">
+              <div class="inline-block px-2.5 py-1 text-xs font-bold text-vgreen-800 bg-vgreen-200 rounded-md mb-3">
+                Giai đoạn 1: Ngắn hạn (1–2 năm)
+              </div>
+              <h4 class="font-bold text-base text-vgray-900 mb-2">Nền Tảng Bán Lẻ & Nhận Diện</h4>
+              <ul class="text-xs text-vgray-700 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-vgreen-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Xây dựng hoàn thiện nền tảng web TMĐT VGreen và hệ thống nhận diện số.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-vgreen-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Đạt mốc <strong>10.000 khách hàng đầu tiên</strong> tại các đô thị lớn.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-vgreen-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Hoàn thiện dịch vụ giao nhanh <strong>2–4 giờ</strong> tại Hà Nội, TP.HCM, Đà Nẵng.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Medium-term -->
+            <div class="p-5 rounded-xl bg-amber-50/60 border border-amber-200 relative card-hover">
+              <div class="inline-block px-2.5 py-1 text-xs font-bold text-amber-900 bg-amber-200 rounded-md mb-3">
+                Giai đoạn 2: Trung hạn (3–5 năm)
+              </div>
+              <h4 class="font-bold text-base text-vgray-900 mb-2">Chuỗi Cung Ứng Xanh & B2B</h4>
+              <ul class="text-xs text-vgray-700 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-700 flex-shrink-0 mt-0.5"></i>
+                  <span>Triển khai chuỗi cung ứng xanh với hệ thống truy xuất nguồn gốc QR/Blockchain.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-700 flex-shrink-0 mt-0.5"></i>
+                  <span>Vận hành kho lạnh thông minh thân thiện môi trường (tiết kiệm năng lượng).</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-700 flex-shrink-0 mt-0.5"></i>
+                  <span>Xây dựng cộng đồng <em>VGreen Living</em>, mở rộng cổng bán sỉ B2B cho nhà hàng/chuỗi F&B.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Long-term -->
+            <div class="p-5 rounded-xl bg-blue-50/60 border border-blue-200 relative card-hover">
+              <div class="inline-block px-2.5 py-1 text-xs font-bold text-blue-900 bg-blue-200 rounded-md mb-3">
+                Giai đoạn 3: Dài hạn (5–10 năm)
+              </div>
+              <h4 class="font-bold text-base text-vgray-900 mb-2">Xuất Khẩu Số & Hệ Sinh Thái O2O</h4>
+              <ul class="text-xs text-vgray-700 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-700 flex-shrink-0 mt-0.5"></i>
+                  <span>Xuất khẩu nông sản trực tuyến sang thị trường quốc tế (Hàn Quốc, Nhật Bản, EU).</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-700 flex-shrink-0 mt-0.5"></i>
+                  <span>Đầu tư trung tâm R&D sản phẩm chế biến sâu giá trị gia tăng cao.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-700 flex-shrink-0 mt-0.5"></i>
+                  <span>Phủ sóng mô hình O2O (online-to-offline) với chuỗi showroom trải nghiệm nông trại thực tế ảo.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.5 Danh Mục Sản Phẩm & 5 Tiêu Chuẩn Chất Lượng -->
+        <div id="brd-products" class="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm">
+            <h3 class="font-bold text-base text-vgray-900 mb-4 flex items-center space-x-2">
+              <i data-lucide="shopping-bag" class="w-4 h-4 text-vgreen-600"></i>
+              <span>1.5 4 Nhóm Danh Mục Sản Phẩm Cốt Lõi</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div class="p-3.5 rounded-xl bg-vgray-50 border border-vgray-200">
+                <span class="text-xs font-bold text-vgreen-700 flex items-center space-x-1.5 mb-1">
+                  <i data-lucide="salad" class="w-4 h-4"></i>
+                  <span>1. Nông Sản Tươi Hữu Cơ</span>
+                </span>
+                <p class="text-xs text-vgray-600 leading-relaxed">Rau ăn lá, củ quả, nấm tươi, trái cây chuẩn VietGAP / GlobalGAP được sơ chế và bảo quản lạnh.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-vgray-50 border border-vgray-200">
+                <span class="text-xs font-bold text-vgreen-700 flex items-center space-x-1.5 mb-1">
+                  <i data-lucide="package" class="w-4 h-4"></i>
+                  <span>2. Nông Sản Khô & Chế Biến</span>
+                </span>
+                <p class="text-xs text-vgray-600 leading-relaxed">Trái cây sấy dẻo, hạt dinh dưỡng macca/điều, tinh bột nghệ, gia vị thảo mộc thiên nhiên.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-vgray-50 border border-vgray-200">
+                <span class="text-xs font-bold text-vgreen-700 flex items-center space-x-1.5 mb-1">
+                  <i data-lucide="apple" class="w-4 h-4"></i>
+                  <span>3. Đồ Ăn Chay & Detox</span>
+                </span>
+                <p class="text-xs text-vgray-600 leading-relaxed">Combo rau củ detox thanh nhiệt theo ngày, thực đơn chay giàu protein thuần thực vật.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-vgray-50 border border-vgray-200">
+                <span class="text-xs font-bold text-vgreen-700 flex items-center space-x-1.5 mb-1">
+                  <i data-lucide="gift" class="w-4 h-4"></i>
+                  <span>4. Đặc Sản Vùng Miền & Quà Tặng</span>
+                </span>
+                <p class="text-xs text-vgray-600 leading-relaxed">Sản phẩm OCOP 4–5 sao các tỉnh, giỏ quà biếu lễ Tết cao cấp kể câu chuyện văn hóa vùng miền.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-gradient-to-br from-vgreen-800 to-vgreen-900 text-white rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-vgold-300 mb-3 flex items-center space-x-2">
+                <i data-lucide="award" class="w-4 h-4"></i>
+                <span>5 Tiêu Chuẩn Kiểm Soát Chất Lượng</span>
+              </h3>
+              <ol class="space-y-2.5 text-xs text-vgreen-100">
+                <li class="flex items-start space-x-2">
+                  <span class="w-4 h-4 rounded-full bg-vgold-400 text-vgreen-950 flex items-center justify-center font-bold text-[10px] mt-0.5">1</span>
+                  <span><strong>Chứng nhận hợp chuẩn:</strong> 100% nông hộ có VietGAP/GlobalGAP hoặc chứng nhận tương đương.</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="w-4 h-4 rounded-full bg-vgold-400 text-vgreen-950 flex items-center justify-center font-bold text-[10px] mt-0.5">2</span>
+                  <span><strong>Kiểm định độc lập:</strong> Kiểm tra dư lượng thuốc BVTV và kim loại nặng trước khi nhập kho.</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="w-4 h-4 rounded-full bg-vgold-400 text-vgreen-950 flex items-center justify-center font-bold text-[10px] mt-0.5">3</span>
+                  <span><strong>Nguyên tắc FEFO:</strong> Quản lý kho First Expired First Out để đảm bảo độ tươi tối đa.</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="w-4 h-4 rounded-full bg-vgold-400 text-vgreen-950 flex items-center justify-center font-bold text-[10px] mt-0.5">4</span>
+                  <span><strong>Bao bì xanh:</strong> Túi sinh học phân hủy hoàn toàn và hộp carton tái chế.</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="w-4 h-4 rounded-full bg-vgold-400 text-vgreen-950 flex items-center justify-center font-bold text-[10px] mt-0.5">5</span>
+                  <span><strong>Minh bạch truy xuất:</strong> Mã QR tra cứu nhật ký thu hoạch và hình ảnh vùng trồng thực tế.</span>
+                </li>
+              </ol>
+            </div>
+            <div class="mt-4 pt-3 border-t border-vgreen-700/60 text-[11px] text-vgreen-300">
+              Cam kết hoàn tiền 100% nếu nông sản bị dập nát hoặc không đúng cam kết hữu cơ.
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.6 Chân Dung Khách Hàng Mục Tiêu -->
+        <div id="brd-personas" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+                <i data-lucide="user-check" class="w-5 h-5 text-vgreen-600"></i>
+                <span>1.6 Chân Dung Khách Hàng Mục Tiêu (Customer Personas)</span>
+              </h3>
+              <p class="text-xs text-vgray-500 mt-1">Phân khúc: 25–45 tuổi, cư dân đô thị hiện đại, thu nhập trung bình khá 10–30 triệu/tháng.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Persona 1 -->
+            <div class="border border-vgreen-200 rounded-2xl p-5 bg-gradient-to-br from-vgreen-50/50 to-white relative card-hover">
+              <div class="flex items-center space-x-3.5 mb-4">
+                <div class="w-12 h-12 rounded-full bg-vgreen-200 text-vgreen-800 flex items-center justify-center font-bold text-lg">
+                  TT
+                </div>
+                <div>
+                  <h4 class="font-bold text-base text-vgray-900">Thu Trang (34 tuổi)</h4>
+                  <p class="text-xs text-vgreen-700 font-medium">Nhân viên văn phòng • TP.HCM</p>
+                </div>
+              </div>
+              <dl class="space-y-2.5 text-xs text-vgray-700">
+                <div class="flex justify-between border-b border-vgray-100 pb-1.5">
+                  <dt class="font-semibold text-vgray-900">Thói quen tiêu dùng:</dt>
+                  <dd class="text-right">Mua rau củ, trái cây online hàng tuần qua ứng dụng; ưu tiên giao nhanh, bao bì sạch.</dd>
+                </div>
+                <div class="flex justify-between border-b border-vgray-100 pb-1.5">
+                  <dt class="font-semibold text-vgray-900">Kênh mua hàng chính:</dt>
+                  <dd class="text-right text-vgreen-700 font-medium">Website thương hiệu, Zalo, Shopee Food</dd>
+                </div>
+                <div class="flex justify-between border-b border-vgray-100 pb-1.5">
+                  <dt class="font-semibold text-vgray-900">Lý do chọn VGreen:</dt>
+                  <dd class="text-right">Tiết kiệm thời gian, nguồn gốc chuẩn VietGAP, thanh toán thẻ tiện lợi.</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-vgray-900 mb-1">Điểm nghẽn cần thấu hiểu:</dt>
+                  <dd class="text-vgray-600">Sợ nhận phải rau héo úa hoặc chậm trễ giờ chuẩn bị bữa tối cho gia đình.</dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Persona 2 -->
+            <div class="border border-amber-200 rounded-2xl p-5 bg-gradient-to-br from-amber-50/50 to-white relative card-hover">
+              <div class="flex items-center space-x-3.5 mb-4">
+                <div class="w-12 h-12 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center font-bold text-lg">
+                  QH
+                </div>
+                <div>
+                  <h4 class="font-bold text-base text-vgray-900">Quang Huy (28 tuổi)</h4>
+                  <p class="text-xs text-amber-800 font-medium">Freelancer Sáng Tạo • Hà Nội</p>
+                </div>
+              </div>
+              <dl class="space-y-2.5 text-xs text-vgray-700">
+                <div class="flex justify-between border-b border-vgray-100 pb-1.5">
+                  <dt class="font-semibold text-vgray-900">Thói quen tiêu dùng:</dt>
+                  <dd class="text-right">Tìm mua đặc sản vùng miền, quà biếu lễ Tết; chuộng sản phẩm có bao bì đẹp, kể chuyện văn hóa.</dd>
+                </div>
+                <div class="flex justify-between border-b border-vgray-100 pb-1.5">
+                  <dt class="font-semibold text-vgray-900">Kênh mua hàng chính:</dt>
+                  <dd class="text-right text-amber-800 font-medium">TikTok Shop, Facebook, Instagram</dd>
+                </div>
+                <div class="flex justify-between border-b border-vgray-100 pb-1.5">
+                  <dt class="font-semibold text-vgray-900">Lý do chọn VGreen:</dt>
+                  <dd class="text-right">Sản phẩm độc đáo, tôn vinh nông sản Việt, giỏ quà sang trọng.</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-vgray-900 mb-1">Điểm nghẽn cần thấu hiểu:</dt>
+                  <dd class="text-vgray-600">Ngại hàng trôi nổi thiếu giấy kiểm định OCOP khi biếu tặng người thân/đối tác.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.7 Ma Trận Phân Tích Cạnh Tranh -->
+        <div id="brd-competitors" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm overflow-hidden">
+          <div class="mb-5">
+            <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+              <i data-lucide="scale" class="w-5 h-5 text-vgreen-600"></i>
+              <span>1.7 Ma Trận Phân Tích Cạnh Tranh Thị Trường</span>
+            </h3>
+            <p class="text-xs text-vgray-500 mt-1">So sánh định vị chiến lược giữa VGreen và các đơn vị lớn trên thị trường: Foodmap.asia, Organica.vn, Nông sản Dũng Hà.</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm border border-vgray-200 rounded-xl overflow-hidden">
+              <thead class="bg-vgray-100 text-vgray-800 uppercase text-[11px] font-bold tracking-wider">
+                <tr>
+                  <th class="py-3 px-4 w-32 border-b border-vgray-200">Tiêu chí</th>
+                  <th class="py-3 px-4 border-b border-vgray-200 bg-vgreen-100 text-vgreen-900 font-black">VGreen (Hệ thống)</th>
+                  <th class="py-3 px-4 border-b border-vgray-200">Foodmap.asia</th>
+                  <th class="py-3 px-4 border-b border-vgray-200">Organica.vn</th>
+                  <th class="py-3 px-4 border-b border-vgray-200">Nông sản Dũng Hà</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-vgray-200 text-xs leading-relaxed">
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Mô hình</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 font-medium text-vgreen-900">Hệ sinh thái TMĐT kết nối - quảng bá - phân phối số nông sản Việt</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Sàn TMĐT nông sản kết nối nông dân</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Chuỗi cửa hàng hữu cơ vật lý & online</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Doanh nghiệp nông sản truyền thống sang online</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Sản phẩm chủ lực</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 font-medium text-vgreen-900">Rau củ hữu cơ VietGAP, đồ detox chay, đặc sản OCOP quà biếu</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Đặc sản vùng miền, thực phẩm sạch</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Nông sản hữu cơ chuẩn quốc tế (USDA, EU)</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Nông sản phổ thông, khô, trái cây giá rẻ</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Tệp khách hàng</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 font-medium text-vgreen-900">Người tiêu dùng đô thị trẻ (25–45 tuổi) & HTX muốn số hóa kênh bán</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Người trẻ đô thị quan tâm nguồn gốc</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Nhóm khách hàng cao cấp, chi trả cao</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Khách hàng phổ thông, ưu tiên giá</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Công nghệ & số hóa</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 font-medium text-vgreen-900">Angular SPA, QR Traceability, Dashboard phân tích dữ liệu, UX hiện đại</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Website TMĐT cơ bản; truy xuất thủ công</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Quản lý đơn cơ bản, chưa liên kết dữ liệu vùng</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Bán hàng đơn giản, không có truy xuất</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Thông điệp</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 font-bold text-vgreen-700">“Chuẩn vị xanh - Trọn vị ngon”</td>
+                  <td class="py-2.5 px-4 text-vgray-600">“Kết nối nông dân - Người tiêu dùng”</td>
+                  <td class="py-2.5 px-4 text-vgray-600">“Sản phẩm hữu cơ chuẩn quốc tế”</td>
+                  <td class="py-2.5 px-4 text-vgray-600">“Nông sản sạch, giá tốt”</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Điểm mạnh</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 font-medium text-vgreen-900">Kết hợp công nghệ - TMĐT - truyền thông xanh, định tuyến kho gần nhất</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Uy tín startup, marketing câu chuyện tốt</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Thương hiệu cao cấp uy tín lâu năm</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Giá rẻ, nguồn hàng số lượng lớn ổn định</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-2.5 px-4 font-bold text-vgray-900 bg-vgray-50/50">Điểm yếu</td>
+                  <td class="py-2.5 px-4 bg-vgreen-50/40 text-vgray-700">Đang giai đoạn phát triển đầu, cần truyền thông mở rộng nhận diện</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Khó kiểm soát đồng nhất chất lượng khi mở rộng</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Giá thành quá cao, tệp khách hàng hẹp</td>
+                  <td class="py-2.5 px-4 text-vgray-600">Thiếu bản sắc thương hiệu, không truy xuất</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 2. ARCHITECTURE & PROCESSES (SRS / FSD)                           -->
+      <!-- ================================================================= -->
+      <section id="srs" class="scroll-mt-20 space-y-10">
+        <div class="border-b border-vgray-200 pb-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold uppercase tracking-wider mb-2">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+            <span>Đặc Tả Kỹ Thuật • Software Requirements Specification & FSD</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-vgray-900 tracking-tight">2. Đặc Tả Kiến Trúc & Quy Trình Hệ Thống – SRS / FSD</h2>
+          <p class="text-sm sm:text-base text-vgray-600 mt-2 leading-relaxed">
+            Tài liệu trung tâm để đội ngũ phát triển và vận hành hệ thống: Mô hình Sitemap phân rã chức năng, 10 Nhóm Use Case, 12 Quy trình nghiệp vụ BPMN và Bộ Quy tắc nghiệp vụ cốt lõi.
+          </p>
+        </div>
+
+        <!-- 2.1 Kiến trúc Sitemap -->
+        <div id="srs-sitemap" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-6">
+          <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+            <i data-lucide="git-fork" class="w-5 h-5 text-vgreen-600"></i>
+            <span>2.1 Kiến Trúc Phân Rã Chức Năng (Sitemap Hệ Thống)</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- User Sitemap Visual -->
+            <div class="border border-vgray-200 rounded-xl overflow-hidden card-hover">
+              <div class="p-3 bg-vgray-50 border-b border-vgray-200 flex items-center justify-between">
+                <span class="font-bold text-xs text-vgreen-800">Sitemap Phân Hệ Khách Hàng (Customer Subsystem)</span>
+                <button onclick="openLightbox('assets/diagrams/page_45_2.png', 'Sitemap Phân Hệ Người Dùng')" class="text-xs text-vgreen-600 hover:underline flex items-center space-x-1">
+                  <span>Phóng to</span>
+                  <i data-lucide="maximize-2" class="w-3 h-3"></i>
+                </button>
+              </div>
+              <div class="p-2 bg-vgray-100 flex items-center justify-center cursor-pointer" onclick="openLightbox('assets/diagrams/page_45_2.png', 'Sitemap Phân Hệ Người Dùng')">
+                <img src="assets/diagrams/page_45_2.png" alt="Sitemap người dùng" class="max-h-56 object-contain">
+              </div>
+              <div class="p-4 text-xs text-vgray-600 space-y-1.5">
+                <p><strong>11 Cụm chức năng khách hàng:</strong></p>
+                <p>Trang chủ, Danh mục & Bộ lọc, Chi tiết sản phẩm (kèm tab CookBook), Giỏ hàng modal trượt, Đặt hàng & Thanh toán, Quản lý tài khoản cá nhân, Sổ địa chỉ, Lịch sử & Theo dõi đơn hàng (5 tab), Quản lý đổi trả trong 24h, Đánh giá đơn hàng (1–5 sao + 5 ảnh), Blog kiến thức và Trợ lý ảo Chatbot (Veebot).</p>
+              </div>
+            </div>
+
+            <!-- Admin Sitemap Visual -->
+            <div class="border border-vgray-200 rounded-xl overflow-hidden card-hover">
+              <div class="p-3 bg-vgray-50 border-b border-vgray-200 flex items-center justify-between">
+                <span class="font-bold text-xs text-blue-800">Sitemap Phân Hệ Quản Trị (Admin Subsystem)</span>
+                <button onclick="openLightbox('assets/diagrams/page_46_2.png', 'Sitemap Phân Hệ Quản Trị')" class="text-xs text-blue-600 hover:underline flex items-center space-x-1">
+                  <span>Phóng to</span>
+                  <i data-lucide="maximize-2" class="w-3 h-3"></i>
+                </button>
+              </div>
+              <div class="p-2 bg-vgray-100 flex items-center justify-center cursor-pointer" onclick="openLightbox('assets/diagrams/page_46_2.png', 'Sitemap Phân Hệ Quản Trị')">
+                <img src="assets/diagrams/page_46_2.png" alt="Sitemap quản trị" class="max-h-56 object-contain">
+              </div>
+              <div class="p-4 text-xs text-vgray-600 space-y-1.5">
+                <p><strong>7 Cụm chức năng quản trị:</strong></p>
+                <p>Dashboard thống kê tổng quan doanh thu/đơn hàng, Quản lý danh mục & sản phẩm/tồn kho, Quản lý đơn hàng (tạo đơn hộ Hotline, đổi trạng thái, in hóa đơn), Phân nhóm khách hàng (Regular, VIP, Đồng, Bạc, Vàng, Bạch Kim), CMS bài viết Blog, Quản lý cấu hình khuyến mãi nâng cao và Quản lý tư vấn hỏi đáp.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.2 Danh mục Tác nhân & 10 Nhóm Use Case -->
+        <div id="srs-usecases" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+                <i data-lucide="network" class="w-5 h-5 text-vgreen-600"></i>
+                <span>2.2 Danh Mục Tác Nhân & 10 Nhóm Use Case Hệ Thống</span>
+              </h3>
+              <p class="text-xs text-vgray-500 mt-1">4 Tác nhân chính: Khách vãng lai (Guest), Người dùng đã đăng nhập (User), Quản trị viên (Admin), Hệ thống bên thứ ba (Cổng thanh toán, Đơn vị vận chuyển).</p>
+            </div>
+          </div>
+
+          <!-- Use Case Diagrams Preview -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="border border-vgray-200 rounded-xl overflow-hidden p-3 bg-vgray-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-xs text-vgray-800">Sơ Đồ Use Case Người Dùng</span>
+                <p class="text-[11px] text-vgray-500">Quan hệ &lt;&lt;include&gt;&gt; và &lt;&lt;extend&gt;&gt; chức năng mua sắm</p>
+              </div>
+              <button onclick="openLightbox('assets/diagrams/page_47_2.png', 'Sơ đồ Use Case Người Dùng')" class="px-2.5 py-1 text-xs bg-white border border-vgray-300 rounded shadow-sm hover:bg-vgray-100 font-medium">Xem sơ đồ</button>
+            </div>
+            <div class="border border-vgray-200 rounded-xl overflow-hidden p-3 bg-vgray-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-xs text-vgray-800">Sơ Đồ Use Case Quản Trị Admin</span>
+                <p class="text-[11px] text-vgray-500">Phân quyền chức năng quản trị viên và nhân sự</p>
+              </div>
+              <button onclick="openLightbox('assets/diagrams/page_50_2.png', 'Sơ đồ Use Case Admin')" class="px-2.5 py-1 text-xs bg-white border border-vgray-300 rounded shadow-sm hover:bg-vgray-100 font-medium">Xem sơ đồ</button>
+            </div>
+          </div>
+
+          <!-- 10 Use Case Groups Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-vgreen-700 block mb-1">Nhóm Quản lý tài khoản (UC-01)</span>
+              <p class="text-xs text-vgray-600">Đăng ký OTP số điện thoại, Đăng nhập, Quên mật khẩu, Đổi mật khẩu, Cập nhật thông tin cá nhân, Quản lý sổ nhiều địa chỉ.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-vgreen-700 block mb-1">Nhóm Tìm kiếm & Xem sản phẩm (UC-02)</span>
+              <p class="text-xs text-vgray-600">Tìm kiếm theo từ khóa thông minh, Lọc đa tiêu chí (danh mục, khoảng giá, chứng nhận VietGAP), Xem chi tiết sản phẩm và Tab CookBook sổ tay nấu ăn.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-vgreen-700 block mb-1">Nhóm Mua hàng & Thanh toán (UC-03)</span>
+              <p class="text-xs text-vgray-600">Thêm vào giỏ hàng (check tồn kho real-time), Áp dụng voucher giảm giá, Tự động định tuyến kho gần nhất, Form xuất hóa đơn GTGT công ty, Cổng thanh toán.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-vgreen-700 block mb-1">Nhóm Hậu mãi & Phản hồi (UC-04)</span>
+              <p class="text-xs text-vgray-600">Theo dõi tiến trình đơn hàng 5 trạng thái, Hủy đơn khi chưa đóng gói, Gửi yêu cầu đổi trả trong 24h kèm ảnh, Đánh giá sản phẩm 1–5 sao kèm tối đa 5 ảnh.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-blue-700 block mb-1">Nhóm Quản lý sản phẩm (Admin - UC-05)</span>
+              <p class="text-xs text-vgray-600">Thêm mới, sửa thông tin, cập nhật hình ảnh, giá bán, đơn vị tính, ngưỡng tồn kho và Ràng buộc bảo vệ: Không xóa sản phẩm đang nằm trong đơn chờ.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-blue-700 block mb-1">Nhóm Quản lý đơn hàng (Admin - UC-06)</span>
+              <p class="text-xs text-vgray-600">Tiếp nhận đơn, Tính năng tạo đơn hàng hộ khách qua Hotline/Email, Chuyển trạng thái đơn, In phiếu đóng gói và hóa đơn bán hàng.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-blue-700 block mb-1">Nhóm Quản lý khách hàng (Admin - UC-07)</span>
+              <p class="text-xs text-vgray-600">Theo dõi thông tin và lịch sử mua sắm, Tự động phân hạng hội viên: Regular, VIP, Đồng, Bạc, Vàng, Bạch Kim dựa trên tổng chi tiêu tích lũy (TotalSpent).</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <span class="font-bold text-blue-700 block mb-1">Nhóm Quản lý Blogs (Admin - UC-08)</span>
+              <p class="text-xs text-vgray-600">Biên tập nội dung bài viết chia sẻ kiến thức sống xanh, mẹo chế biến nông sản, phân loại chuyên mục và tối ưu thẻ meta chuẩn SEO.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50 md:col-span-2">
+              <span class="font-bold text-blue-700 block mb-1">Nhóm Báo cáo & Thống kê (Admin - UC-09 & UC-10)</span>
+              <p class="text-xs text-vgray-600">Thống kê doanh thu theo ngày/tháng/năm, Báo cáo top sản phẩm bán chạy nhất, Biểu đồ tỷ lệ hủy đơn, Cảnh báo số lượng sản phẩm chạm ngưỡng tồn kho tối thiểu (MinThreshold).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.3 Quy Trình Nghiệp Vụ BPMN Workflows -->
+        <div id="srs-bpmn" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-6">
+          <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+            <i data-lucide="workflow" class="w-5 h-5 text-vgreen-600"></i>
+            <span>2.3 Đặc Tả 12 Luồng Quy Trình Nghiệp Vụ BPMN</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Customer BPMN Flows -->
+            <div class="space-y-3">
+              <h4 class="font-bold text-sm text-vgreen-800 flex items-center space-x-1.5">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                <span>6 Luồng Nghiệp Vụ Khách Hàng</span>
+              </h4>
+              <div class="space-y-2">
+                <button onclick="openLightbox('assets/diagrams/page_54_2.png', 'BPMN Đăng ký & Đăng nhập OTP')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-vgreen-500 hover:bg-vgreen-50/50 transition flex items-center justify-between text-xs">
+                  <span>1. Đăng ký & Đăng nhập (Xác thực OTP SMS/Email)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_56_2.png', 'BPMN Quản lý giỏ hàng')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-vgreen-500 hover:bg-vgreen-50/50 transition flex items-center justify-between text-xs">
+                  <span>2. Quản lý giỏ hàng (Kiểm tra tồn kho thời gian thực)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_58_2.png', 'BPMN Đặt hàng & Thanh toán')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-vgreen-500 hover:bg-vgreen-50/50 transition flex items-center justify-between text-xs">
+                  <span>3. Đặt hàng & Thanh toán (Chọn kho gần nhất & Xuất VAT)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_60_2.png', 'BPMN Theo dõi đơn hàng')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-vgreen-500 hover:bg-vgreen-50/50 transition flex items-center justify-between text-xs">
+                  <span>4. Theo dõi & Hủy đơn hàng (Khi chưa đóng gói)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_62_2.png', 'BPMN Đánh giá & Phản hồi')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-vgreen-500 hover:bg-vgreen-50/50 transition flex items-center justify-between text-xs">
+                  <span>5. Đánh giá sản phẩm (1–5 sao & Đính kèm 5 ảnh)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_64_2.png', 'BPMN Quản lý tài khoản')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-vgreen-500 hover:bg-vgreen-50/50 transition flex items-center justify-between text-xs">
+                  <span>6. Quản lý tài khoản & Sổ địa chỉ giao hàng</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Admin BPMN Flows -->
+            <div class="space-y-3">
+              <h4 class="font-bold text-sm text-blue-800 flex items-center space-x-1.5">
+                <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                <span>6 Luồng Nghiệp Vụ Quản Trị Hệ Thống</span>
+              </h4>
+              <div class="space-y-2">
+                <button onclick="openLightbox('assets/diagrams/page_66_2.png', 'BPMN Đăng nhập Admin')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-blue-500 hover:bg-blue-50/50 transition flex items-center justify-between text-xs">
+                  <span>1. Đăng nhập Admin cô lập & Phân quyền bảo mật</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_68_2.png', 'BPMN Quản lý sản phẩm')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-blue-500 hover:bg-blue-50/50 transition flex items-center justify-between text-xs">
+                  <span>2. CRUD Sản phẩm (Chặn xóa sản phẩm trong đơn chờ)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_70_2.png', 'BPMN Quản lý đơn hàng')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-blue-500 hover:bg-blue-50/50 transition flex items-center justify-between text-xs">
+                  <span>3. Quản lý đơn hàng (Tạo đơn hộ Hotline & In hóa đơn)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_72_2.png', 'BPMN Quản lý khách hàng')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-blue-500 hover:bg-blue-50/50 transition flex items-center justify-between text-xs">
+                  <span>4. Phân nhóm khách hàng (Regular, VIP, Đồng, Bạc, Vàng)</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_73_2.png', 'BPMN Quản lý bài đăng')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-blue-500 hover:bg-blue-50/50 transition flex items-center justify-between text-xs">
+                  <span>5. Quản lý CMS bài viết Sống Xanh & Tối ưu SEO</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+                <button onclick="openLightbox('assets/diagrams/page_75_2.png', 'BPMN Quản lý khuyến mãi')" class="w-full text-left p-2.5 rounded-lg border border-vgray-200 hover:border-blue-500 hover:bg-blue-50/50 transition flex items-center justify-between text-xs">
+                  <span>6. Cấu hình Voucher khuyến mãi & Giới hạn chi tiêu</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4 text-vgray-400"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.4 Bộ Quy Tắc Nghiệp Vụ Cốt Lõi (Business Rules) -->
+        <div id="srs-rules" class="scroll-mt-24 bg-gradient-to-br from-vgray-900 to-vgreen-950 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+          <h3 class="font-bold text-lg text-vgold-400 mb-6 flex items-center space-x-2">
+            <i data-lucide="scroll" class="w-5 h-5"></i>
+            <span>2.4 Bộ Quy Tắc Nghiệp Vụ Cốt Lõi (Business Rules - BR)</span>
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div class="p-4 rounded-xl bg-white/10 border border-white/10">
+              <span class="font-mono text-vgold-400 font-bold block mb-1">BR-01 • Quản Lý HSD FEFO</span>
+              <p class="text-vgreen-100 leading-relaxed">
+                Áp dụng nguyên tắc <strong>First Expired First Out</strong>: Lô hàng có hạn sử dụng gần nhất bắt buộc phải được ưu tiên xuất kho trước đối với toàn bộ danh mục rau củ tươi sống.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/10 border border-white/10">
+              <span class="font-mono text-vgold-400 font-bold block mb-1">BR-02 • Chính Sách Giao Hàng</span>
+              <p class="text-vgreen-100 leading-relaxed">
+                <strong>Miễn phí vận chuyển</strong> cho mọi đơn hàng từ <strong>200.000đ</strong> trở lên. Cam kết giao hỏa tốc <strong>2–4 giờ</strong> trong nội thành nhờ tự động chọn kho gần nhất.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/10 border border-white/10">
+              <span class="font-mono text-vgold-400 font-bold block mb-1">BR-03 • Thời Hạn Đổi Trả</span>
+              <p class="text-vgreen-100 leading-relaxed">
+                Nông sản tươi sống: Tiếp nhận yêu cầu đổi trả trong <strong>24 giờ</strong> (kèm ảnh dập/hỏng). Nông sản khô/đóng gói: Đổi trả trong <strong>7 ngày</strong> nếu còn nguyên niêm phong.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/10 border border-white/10">
+              <span class="font-mono text-vgold-400 font-bold block mb-1">BR-04 • Ràng Buộc Voucher</span>
+              <p class="text-vgreen-100 leading-relaxed">
+                Mỗi mã giảm giá quy định: Giới hạn số lượt dùng tối đa, giá trị đơn tối thiểu (MinOrderValue) và mức giảm trần tối đa (MaxDiscountAmount).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 3. FUNCTIONAL REQUIREMENTS (FR)                                   -->
+      <!-- ================================================================= -->
+      <section id="fr" class="scroll-mt-20 space-y-10">
+        <div class="border-b border-vgray-200 pb-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold uppercase tracking-wider mb-2">
+            <i data-lucide="check-square" class="w-3.5 h-3.5"></i>
+            <span>Đặc Tả Chức Năng • Functional Requirements</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-vgray-900 tracking-tight">3. Đặc Tả Yêu Cầu Chức Năng – Functional Requirements</h2>
+          <p class="text-sm sm:text-base text-vgray-600 mt-2 leading-relaxed">
+            Danh mục chi tiết 20 yêu cầu chức năng nghiệp vụ chuẩn hóa cho cả Phân hệ Người Dùng (FR 01–11) và Phân hệ Quản Trị Hệ Thống (FR 12–20), cùng ma trận luồng dữ liệu xử lý đầu vào và phản hồi.
+          </p>
+        </div>
+
+        <!-- 3.1 Phân Hệ Khách Hàng (FR 01 - FR 11) -->
+        <div id="fr-user" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b border-vgray-100 pb-4">
+            <div class="flex items-center space-x-2.5">
+              <span class="p-2 bg-vgreen-100 text-vgreen-800 rounded-lg"><i data-lucide="user" class="w-5 h-5"></i></span>
+              <div>
+                <h3 class="font-bold text-lg text-vgray-900">3.1 Phân Hệ Chức Năng Người Dùng (Customer Module)</h3>
+                <p class="text-xs text-vgray-500">11 Yêu cầu chức năng phục vụ trải nghiệm mua sắm nông sản trực tuyến</p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 text-xs font-bold bg-vgreen-100 text-vgreen-800 rounded-full border border-vgreen-200">11 Chức Năng</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-01: Quản Lý Tài Khoản & Xác Thực OTP</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Cho phép khách hàng đăng ký, đăng nhập an toàn bằng số điện thoại/email với mã OTP xác thực một lần. Hỗ trợ tính năng quên mật khẩu và bảo mật mật khẩu một chiều PasswordHash.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-02: Tìm Kiếm Thông Minh & Bộ Lọc Nông Sản</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tìm kiếm sản phẩm theo tên, loại rau củ, vùng miền; bộ lọc theo danh mục chính/con, mức giá, và chứng nhận tiêu chuẩn (VietGAP, GlobalGAP, Organic).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-03: Sổ Tay Nấu Ăn (CookBook Tích Hợp)</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-amber-100 text-amber-800 font-mono rounded">Nổi bật</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tích hợp tab công thức chế biến món ngon từ rau củ sạch ngay trong trang chi tiết sản phẩm, video hướng dẫn và nút <em>"Thêm toàn bộ nguyên liệu vào giỏ"</em> chỉ với 1-click.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-04: Quản Lý Giỏ Hàng & Kiểm Tra Tồn Kho</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Giỏ hàng modal trượt bên phải, kiểm tra số lượng tồn kho thời gian thực, cảnh báo khi sản phẩm hết hàng và thanh tiến độ đạt mốc Freeship 200.000đ.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-05: Đặt Hàng & Tự Động Định Tuyến Kho</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Quy trình checkout tối ưu: chọn địa chỉ giao hàng, thuật toán tự động chọn kho hàng gần nhất để giao hỏa tốc 2–4h, áp dụng mã voucher giảm giá và tính phí ship chuẩn xác.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-06: Xuất Hóa Đơn Điện Tử VAT Doanh Nghiệp</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Doanh nghiệp</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Hỗ trợ checkbox và form nhập thông tin doanh nghiệp (Tên công ty, Mã số thuế, Email nhận hóa đơn GTGT), tự động đồng bộ sang bộ phận kế toán để xuất hóa đơn điện tử hợp lệ.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-07: Cổng Thanh Toán Đa Kênh An Toàn</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tích hợp thanh toán khi nhận hàng (COD), Ví điện tử VNPAY/Momo, Thẻ ATM/Visa với chuẩn bảo mật giao dịch SSL 256-bit và xác nhận tức thì.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-08: Sổ Nhiều Địa Chỉ Nhận Hàng</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Tiện ích</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Cho phép khách hàng lưu nhiều địa chỉ nhận hàng (Nhà riêng, Văn phòng), gắn nhãn và thiết lập 1 địa chỉ mặc định để rút ngắn thời gian đặt hàng lần sau.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-09: Theo Dõi Đơn Hàng 5 Trạng Thái</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Theo dõi hành trình đơn hàng qua 5 trạng thái minh bạch: <em>Chờ xác nhận &rarr; Đang xử lý &rarr; Đang giao hàng &rarr; Đã giao &rarr; Đã hủy</em>. Hỗ trợ hủy đơn khi đơn chưa đóng gói.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-10: Quản Lý Đổi Trả Nông Sản 24 Giờ</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-rose-100 text-rose-800 font-mono rounded">Cam kết</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tiếp nhận yêu cầu đổi trả trong 24h đối với nông sản tươi sống (kèm ảnh chụp hư hỏng/dập nát) và 7 ngày đối với hàng đóng gói khô; theo dõi tiến độ xử lý hoàn tiền minh bạch.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50 md:col-span-2">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-vgreen-800">FR-11: Đánh Giá Đơn Hàng (1–5 Sao + 5 Ảnh) & Trợ Lý Veebot</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-vgreen-100 text-vgreen-800 font-mono rounded">Tương tác</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Khách hàng đã nhận đơn có thể chấm điểm 1–5 sao, viết bình luận và tải lên tối đa 5 hình ảnh thực tế. Cùng với Trợ lý ảo Veebot hỗ trợ tư vấn dinh dưỡng và giải đáp câu hỏi sản phẩm 24/7.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.2 Phân Hệ Quản Trị Hệ Thống (FR 12 - FR 20) -->
+        <div id="fr-admin" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b border-vgray-100 pb-4">
+            <div class="flex items-center space-x-2.5">
+              <span class="p-2 bg-blue-100 text-blue-800 rounded-lg"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+              <div>
+                <h3 class="font-bold text-lg text-vgray-900">3.2 Phân Hệ Chức Năng Quản Trị Hệ Thống (Admin Module)</h3>
+                <p class="text-xs text-vgray-500">9 Yêu cầu chức năng phục vụ quản lý sản phẩm, đơn hàng, kho bãi và marketing</p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 text-xs font-bold bg-blue-100 text-blue-800 rounded-full border border-blue-200">9 Chức Năng</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-12: Cổng Đăng Nhập Cô Lập & Phân Quyền RBAC</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Bảo mật</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Đăng nhập quản trị viên trên URL độc lập, xác thực tài khoản nghiêm ngặt và phân quyền chi tiết theo vai trò (Admin tổng, Quản lý kho, Nhân viên chăm sóc khách hàng).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-13: Dashboard Điều Hành Thời Gian Thực</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Điều hành</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Biểu đồ thống kê doanh thu theo ngày/tuần/tháng, tỷ lệ hoàn tất đơn hàng, số lượng đơn chờ xử lý, số câu hỏi tư vấn chưa trả lời và top sản phẩm bán chạy nhất.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-14: Quản Trị Danh Mục & CRUD Sản Phẩm An Toàn</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Bắt buộc</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Thêm mới, sửa thông tin, giá bán, hình ảnh nông sản; tích hợp cơ chế bảo vệ ràng buộc toàn vẹn dữ liệu: <em>Nghiêm cấm xóa sản phẩm đang nằm trong đơn hàng đang xử lý hoặc đang giao</em>.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-15: Quản Lý Đơn Hàng & Tạo Đơn Hộ Hotline</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Nổi bật</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tiếp nhận đơn, đổi trạng thái đơn, in phiếu xuất kho và hóa đơn bán lẻ; đặc biệt hỗ trợ nhân viên tư vấn tạo đơn hàng mới hộ khách qua Hotline hoặc Email.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-16: Quản Lý Kho Bãi & Kiểm Soát HSD FEFO</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Chất lượng</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Quản lý nhiều kho hàng theo khu vực, lập phiếu nhập kho, theo dõi số lượng tồn và cảnh báo tự động khi sản phẩm chạm ngưỡng tồn tối thiểu (MinThreshold), xuất hàng theo hạn dùng FEFO.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-17: Phân Nhóm Hội Viên Khách Hàng Tự Động</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">CRM</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tự động tính lũy kế chi tiêu (TotalSpent) của khách hàng để phân loại thành 6 hạng hội viên: Regular, VIP, Đồng, Bạc, Vàng, Bạch Kim với chính sách ưu đãi riêng biệt.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-18: Cấu Hình Chương Trình Khuyến Mãi Nâng Cao</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Marketing</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Tạo mã voucher ưu đãi, áp dụng giảm theo tỷ lệ % hoặc số tiền cố định, thiết lập ngày bắt đầu/kết thúc, giới hạn lượt dùng tối đa, giá trị đơn tối thiểu và mức trần giảm giá.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-19: Quản Trị Nội Dung Bài Viết CMS Sống Xanh</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Nội dung</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Trình soạn thảo bài viết giàu tính năng cho phép tạo, sửa bài đăng chia sẻ mẹo nấu ăn, kiến thức nông sản sạch, phân loại chuyên mục và tối ưu thẻ meta chuẩn SEO.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-vgray-200 bg-vgray-50/50 md:col-span-2">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-bold text-blue-800">FR-20: Quản Lý Tư Vấn Sản Phẩm & Chăm Sóc Khách Hàng</span>
+                <span class="px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 font-mono rounded">Hỗ trợ</span>
+              </div>
+              <p class="text-xs text-vgray-600 leading-relaxed">
+                Theo dõi toàn bộ câu hỏi thắc mắc từ khách hàng theo từng sản phẩm cụ thể, trạng thái đã trả lời / chưa trả lời và gửi phản hồi tư vấn trực tiếp đến tài khoản người dùng.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.3 Ma Trận Luồng Dữ Liệu Input / Output -->
+        <div id="fr-matrix" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm overflow-hidden">
+          <div class="mb-5">
+            <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+              <i data-lucide="arrow-left-right" class="w-5 h-5 text-amber-600"></i>
+              <span>3.3 Ma Trận Luồng Xử Lý Đầu Vào & Phản Hồi Hệ Thống</span>
+            </h3>
+            <p class="text-xs text-vgray-500 mt-1">Đặc tả luồng tương tác dữ liệu hai chiều giữa Hệ thống VGreen và 4 tác nhân ngoài.</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm border border-vgray-200 rounded-xl overflow-hidden">
+              <thead class="bg-vgray-100 text-vgray-800 uppercase text-[11px] font-bold tracking-wider">
+                <tr>
+                  <th class="py-3 px-4 w-48 border-b border-vgray-200">Tác nhân ngoài</th>
+                  <th class="py-3 px-4 border-b border-vgray-200">Dữ liệu đầu vào (Input Hệ thống nhận)</th>
+                  <th class="py-3 px-4 border-b border-vgray-200">Dữ liệu đầu ra (Output Hệ thống phản hồi)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-vgray-200 text-xs leading-relaxed">
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-3 px-4 font-bold text-vgray-900 bg-vgray-50/50">
+                    <span class="flex items-center space-x-1.5">
+                      <i data-lucide="user" class="w-4 h-4 text-vgreen-600"></i>
+                      <span>Khách Hàng</span>
+                    </span>
+                  </td>
+                  <td class="py-3 px-4 text-vgray-700">Thông tin đăng ký/đăng nhập, địa chỉ giao nhận, giỏ hàng, thông tin thanh toán, yêu cầu xuất hóa đơn VAT, đánh giá kèm ảnh, yêu cầu đổi trả.</td>
+                  <td class="py-3 px-4 text-vgreen-800 font-medium">Mã OTP xác thực, danh sách sản phẩm & tồn kho, xác nhận đơn hàng thành công, trạng thái vận chuyển thời gian thực, kết quả duyệt đổi trả.</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-3 px-4 font-bold text-vgray-900 bg-vgray-50/50">
+                    <span class="flex items-center space-x-1.5">
+                      <i data-lucide="shield" class="w-4 h-4 text-blue-600"></i>
+                      <span>Quản Trị Viên</span>
+                    </span>
+                  </td>
+                  <td class="py-3 px-4 text-vgray-700">Dữ liệu CRUD sản phẩm, cập nhật giá/tồn kho, tạo đơn hộ Hotline, duyệt trạng thái đơn, thiết lập voucher khuyến mãi, bài viết CMS, nội dung trả lời tư vấn.</td>
+                  <td class="py-3 px-4 text-blue-800 font-medium">Báo cáo doanh thu thời gian thực, danh sách đơn hàng mới, cảnh báo tồn kho tối thiểu, thông báo đánh giá mới, phiếu in giao hàng.</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-3 px-4 font-bold text-vgray-900 bg-vgray-50/50">
+                    <span class="flex items-center space-x-1.5">
+                      <i data-lucide="credit-card" class="w-4 h-4 text-purple-600"></i>
+                      <span>Cổng Thanh Toán</span>
+                    </span>
+                  </td>
+                  <td class="py-3 px-4 text-vgray-700">Kết quả xử lý thanh toán từ đối tác (Thành công / Thất bại / Hết hạn giao dịch), mã giao dịch ngân hàng (TransactionID).</td>
+                  <td class="py-3 px-4 text-purple-800 font-medium">Yêu cầu thanh toán (Số tiền, Mã đơn hàng, Thông tin bảo mật Token, URL chuyển hướng sau thanh toán).</td>
+                </tr>
+                <tr class="hover:bg-vgray-50">
+                  <td class="py-3 px-4 font-bold text-vgray-900 bg-vgray-50/50">
+                    <span class="flex items-center space-x-1.5">
+                      <i data-lucide="truck" class="w-4 h-4 text-amber-600"></i>
+                      <span>Đơn Vị Vận Chuyển</span>
+                    </span>
+                  </td>
+                  <td class="py-3 px-4 text-vgray-700">Mã vận đơn, tọa độ và trạng thái giao hàng cập nhật (Đã lấy hàng, Đang giao, Giao thành công, Giao thất bại).</td>
+                  <td class="py-3 px-4 text-amber-800 font-medium">Yêu cầu vận chuyển, địa chỉ kho lấy hàng gần nhất, địa chỉ người nhận, số điện thoại, ghi chú giao nhận và thu hộ COD.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 4. NON-FUNCTIONAL REQUIREMENTS (NFR)                              -->
+      <!-- ================================================================= -->
+      <section id="nfr" class="scroll-mt-20 space-y-10">
+        <div class="border-b border-vgray-200 pb-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-100 text-purple-900 text-xs font-semibold uppercase tracking-wider mb-2">
+            <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+            <span>Tiêu Chuẩn Hệ Thống • Non-Functional Requirements</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-vgray-900 tracking-tight">4. Tiêu Chuẩn Kỹ Thuật & Yêu Cầu Phi Chức Năng – NFR</h2>
+          <p class="text-sm sm:text-base text-vgray-600 mt-2 leading-relaxed">
+            Định nghĩa các tiêu chuẩn khắt khe về hiệu năng tốc độ tải trang, an toàn bảo mật dữ liệu, tuân thủ pháp lý và kiến trúc hạ tầng công nghệ của hệ thống.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- 4.1 Performance -->
+          <div id="nfr-performance" class="scroll-mt-24 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-vgreen-100 text-vgreen-700 flex items-center justify-center mb-4">
+                <i data-lucide="zap" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-base text-vgray-900 mb-2">4.1 Hiệu Năng & Tốc Độ</h3>
+              <ul class="text-xs text-vgray-600 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-vgreen-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Thời gian tải trang (Page Load Time) <strong>dưới 3 giây</strong> trong điều kiện vận hành chuẩn.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-vgreen-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Tối ưu hình ảnh sản phẩm định dạng WebP, áp dụng Lazy-loading.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-vgreen-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Hỗ trợ đồng thời hàng nghìn phiên truy cập không nghẽn giỏ hàng.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-vgray-100 text-[11px] text-vgreen-700 font-medium">
+              Mục tiêu: Tốc độ tối ưu trên mạng di động 4G/5G
+            </div>
+          </div>
+
+          <!-- 4.2 Security -->
+          <div id="nfr-security" class="scroll-mt-24 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4">
+                <i data-lucide="lock" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-base text-vgray-900 mb-2">4.2 Bảo Mật Dữ Liệu</h3>
+              <ul class="text-xs text-vgray-600 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Mật khẩu người dùng được mã hóa một chiều <strong>PasswordHash</strong> (Bcrypt).</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Mã hóa kết nối thanh toán và truyền dữ liệu <strong>SSL/TLS 256-bit</strong>.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Cơ chế bảo vệ chống tấn công Injection, CSRF và XSS.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-vgray-100 text-[11px] text-purple-700 font-medium">
+              Chuẩn bảo mật giao dịch ngân hàng & ví điện tử
+            </div>
+          </div>
+
+          <!-- 4.3 Compliance -->
+          <div id="nfr-compliance" class="scroll-mt-24 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
+                <i data-lucide="scale" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-base text-vgray-900 mb-2">4.3 Tuân Thủ Pháp Lý</h3>
+              <ul class="text-xs text-vgray-600 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Tuân thủ nghiêm ngặt <strong>Luật An toàn thông tin mạng</strong> Việt Nam.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Cam kết bảo vệ dữ liệu cá nhân theo <strong>Nghị định 13/2023/NĐ-CP</strong>.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                  <span>Tuyệt đối không chia sẻ dữ liệu người dùng cho bên thứ ba ngoài vận chuyển và thanh toán.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-vgray-100 text-[11px] text-blue-700 font-medium">
+              Minh bạch chính sách bảo mật & quyền riêng tư
+            </div>
+          </div>
+
+          <!-- 4.4 Tech Architecture -->
+          <div id="nfr-architecture" class="scroll-mt-24 bg-white rounded-2xl p-6 border border-vgray-200 shadow-sm card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+                <i data-lucide="server" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-base text-vgray-900 mb-2">4.4 Kiến Trúc Hạ Tầng</h3>
+              <ul class="text-xs text-vgray-600 space-y-2 leading-relaxed">
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                  <span><strong>Frontend:</strong> Angular SPA (Giao diện người dùng & Quản trị).</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                  <span><strong>Backend:</strong> Node.js / Express RESTful API chuẩn REST.</span>
+                </li>
+                <li class="flex items-start space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                  <span><strong>Database:</strong> MongoDB Cluster lưu trữ linh hoạt NoSQL.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-vgray-100 text-[11px] text-amber-700 font-medium">
+              Phân tách độc lập tầng giao diện và dịch vụ
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 5. UI/UX SPECIFICATIONS & WIREFRAMES GALLERY                     -->
+      <!-- ================================================================= -->
+      <section id="uiux" class="scroll-mt-20 space-y-10">
+        <div class="border-b border-vgray-200 pb-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-semibold uppercase tracking-wider mb-2">
+            <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+            <span>Thiết Kế Trải Nghiệm • UI/UX Design System & Wireframes</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-vgray-900 tracking-tight">5. Đặc Tả Giao Diện & Trải Nghiệm – UI/UX Specifications</h2>
+          <p class="text-sm sm:text-base text-vgray-600 mt-2 leading-relaxed">
+            Quy chuẩn hệ thống thiết kế (Design System: Logo, Typography, Bảng màu, UI Components) và thư viện hoàn chỉnh các màn hình Wireframes & Mockups cho phân hệ Khách hàng và Quản trị.
+          </p>
+        </div>
+
+        <!-- 5.1 Design System & Style Guide -->
+        <div id="uiux-design-system" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-6">
+          <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+            <i data-lucide="swatch-book" class="w-5 h-5 text-vgreen-600"></i>
+            <span>5.1 Hệ Thống Thiết Kế & Quy Chuẩn Giao Diện (Design System)</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Logo & Brand Identity -->
+            <div class="p-5 rounded-xl border border-vgray-200 bg-vgray-50 flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-vgreen-600 text-white flex items-center justify-center mb-3 shadow-md shadow-vgreen-600/30">
+                  <i data-lucide="sprout" class="w-7 h-7"></i>
+                </div>
+                <h4 class="font-bold text-sm text-vgray-900 mb-1">Biểu Tượng Logo VGreen</h4>
+                <p class="text-xs text-vgray-600 leading-relaxed">
+                  Chữ <strong>V</strong> tượng trưng cho Việt Nam & Vegetables; đan xen cùng chữ <strong>G</strong> (Green) ôm trọn lấy chiếc lá xanh vươn mình, thể hiện cam kết gắn kết thiên nhiên và nông nghiệp xanh bền vững.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-vgray-200">
+                <button onclick="openLightbox('assets/styleguides/LOGO.jpg', 'Quy chuẩn Logo VGreen')" class="text-xs text-vgreen-700 font-semibold hover:underline flex items-center space-x-1">
+                  <span>Xem bản vẽ quy chuẩn logo</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Typography -->
+            <div class="p-5 rounded-xl border border-vgray-200 bg-vgray-50 flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
+                  <i data-lucide="type" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-bold text-sm text-vgray-900 mb-1">Quy Chuẩn Typography</h4>
+                <p class="text-xs text-vgray-600 leading-relaxed mb-3">
+                  Sử dụng 2 font chữ chuẩn quốc tế tối ưu hiển thị tiếng Việt:
+                </p>
+                <div class="space-y-1.5 text-xs">
+                  <div class="p-2 bg-white rounded border border-vgray-200">
+                    <span class="font-sans font-bold text-vgray-900">SF Pro / Plus Jakarta:</span>
+                    <span class="text-vgray-500">Tiêu đề lớn Heading, hiện đại và chuẩn xác.</span>
+                  </div>
+                  <div class="p-2 bg-white rounded border border-vgray-200">
+                    <span class="font-body font-medium text-vgray-900">Lexend:</span>
+                    <span class="text-vgray-500">Nội dung Body text, giảm mỏi mắt, dễ đọc.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Color Palette -->
+            <div class="p-5 rounded-xl border border-vgray-200 bg-vgray-50 flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-3">
+                  <i data-lucide="pipette" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-bold text-sm text-vgray-900 mb-1">Bảng Màu Nhận Diện Thương Hiệu</h4>
+                <p class="text-xs text-vgray-600 leading-relaxed mb-3">
+                  Các mã màu định danh nhận diện thương hiệu VGreen:
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                  <div class="flex items-center space-x-1.5 p-1.5 bg-white rounded border border-vgray-200">
+                    <span class="w-4 h-4 rounded bg-[#349409] flex-shrink-0"></span>
+                    <span>#349409 (Primary)</span>
+                  </div>
+                  <div class="flex items-center space-x-1.5 p-1.5 bg-white rounded border border-vgray-200">
+                    <span class="w-4 h-4 rounded bg-[#3CB018] flex-shrink-0"></span>
+                    <span>#3CB018 (Main)</span>
+                  </div>
+                  <div class="flex items-center space-x-1.5 p-1.5 bg-white rounded border border-vgray-200">
+                    <span class="w-4 h-4 rounded bg-[#F2BF3D] flex-shrink-0"></span>
+                    <span>#F2BF3D (Gold)</span>
+                  </div>
+                  <div class="flex items-center space-x-1.5 p-1.5 bg-white rounded border border-vgray-200">
+                    <span class="w-4 h-4 rounded bg-[#F2F3ED] border flex-shrink-0"></span>
+                    <span>#F2F3ED (BG)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-vgray-200">
+                <button onclick="openLightbox('assets/styleguides/ColorSystem.jpg', 'Hệ thống bảng màu Color System')" class="text-xs text-vgreen-700 font-semibold hover:underline flex items-center space-x-1">
+                  <span>Xem toàn bộ Color System</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Style Guides Sheet Gallery -->
+          <div class="mt-6">
+            <h4 class="font-bold text-sm text-vgray-900 mb-4 flex items-center space-x-2">
+              <i data-lucide="image" class="w-4 h-4 text-vgreen-600"></i>
+              <span>Quy Chuẩn Nhận Diện Thương Hiệu & Thư Viện Biểu Tượng Icon</span>
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/styleguides/LOGO.jpg', 'Quy Chuẩn Nhận Diện Logo VGreen')">
+            <img src="assets/styleguides/LOGO.jpg" alt="Quy Chuẩn Nhận Diện Logo VGreen" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Styleguides
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Chuẩn Nhận Diện Logo VGreen</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Biểu tượng kết hợp chữ V (Việt Nam/Vegetables) và chữ G (Green) ôm trọn chiếc lá xanh vươn mình phát triển.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>LOGO.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/styleguides/LOGO.jpg', 'Quy Chuẩn Nhận Diện Logo VGreen')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/styleguides/Bộ Nhận Diện Thương Hiệu.jpg', 'Quy Chuẩn Không Gian Thương Hiệu')">
+            <img src="assets/styleguides/Bộ Nhận Diện Thương Hiệu.jpg" alt="Quy Chuẩn Không Gian Thương Hiệu" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Styleguides
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Chuẩn Không Gian Thương Hiệu</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Khoảng cách an toàn, quy chuẩn đặt logo trên bao bì thân thiện môi trường và nhãn mác truy xuất nguồn gốc.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Bộ Nhận Diện Thương Hiệu.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/styleguides/Bộ Nhận Diện Thương Hiệu.jpg', 'Quy Chuẩn Không Gian Thương Hiệu')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/styleguides/ColorSystem.jpg', 'Hệ Thống Bảng Màu Nhận Diện')">
+            <img src="assets/styleguides/ColorSystem.jpg" alt="Hệ Thống Bảng Màu Nhận Diện" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Styleguides
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Hệ Thống Bảng Màu Nhận Diện</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Primary Green (#349409, #3CB018), Accent Warm Gold (#F2BF3D), Neutral Light (#F2F3ED), Hệ màu trạng thái Semantic.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>ColorSystem.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/styleguides/ColorSystem.jpg', 'Hệ Thống Bảng Màu Nhận Diện')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/styleguides/Icon.jpg', 'Hệ Thống Biểu Tượng Giao Diện 1')">
+            <img src="assets/styleguides/Icon.jpg" alt="Hệ Thống Biểu Tượng Giao Diện 1" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Styleguides
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Hệ Thống Biểu Tượng Giao Diện 1</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Bộ icon vector đồng nhất phục vụ các danh mục rau củ, giỏ hàng, thông báo và trạng thái đơn hàng.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Icon.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/styleguides/Icon.jpg', 'Hệ Thống Biểu Tượng Giao Diện 1')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/styleguides/Icon2.jpg', 'Hệ Thống Biểu Tượng Giao Diện 2')">
+            <img src="assets/styleguides/Icon2.jpg" alt="Hệ Thống Biểu Tượng Giao Diện 2" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Styleguides
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Hệ Thống Biểu Tượng Giao Diện 2</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Bộ icon chứng nhận chất lượng (VietGAP, GlobalGAP, Organic), vận chuyển nhanh và phương thức thanh toán.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Icon2.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/styleguides/Icon2.jpg', 'Hệ Thống Biểu Tượng Giao Diện 2')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/styleguides/Icon3.jpg', 'Hệ Thống Biểu Tượng Giao Diện 3')">
+            <img src="assets/styleguides/Icon3.jpg" alt="Hệ Thống Biểu Tượng Giao Diện 3" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Styleguides
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Hệ Thống Biểu Tượng Giao Diện 3</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Bộ icon quản lý tài khoản, sổ địa chỉ, đánh giá sao trải nghiệm và trợ lý ảo hỗ trợ trực tuyến.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Icon3.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/styleguides/Icon3.jpg', 'Hệ Thống Biểu Tượng Giao Diện 3')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.2 Thư Viện Wireframes & Mockups Khách Hàng -->
+        <div id="uiux-user-screens" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-vgray-200 pb-4">
+            <div>
+              <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+                <i data-lucide="monitor" class="w-5 h-5 text-vgreen-600"></i>
+                <span>5.2 Thư Viện 19 Màn Hình Giao Diện Người Dùng (User Wireframes & Mockups)</span>
+              </h3>
+              <p class="text-xs text-vgray-500 mt-1">Đặc tả chi tiết các màn hình: Trang chủ, CookBook, Giỏ hàng modal, Xuất hóa đơn VAT, Quản lý đơn hàng, Đổi trả trong 24h, v.v.</p>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 bg-vgreen-100 text-vgreen-800 rounded-full border border-vgreen-300 self-start sm:self-auto">
+              19 Màn Hình Chuẩn Hóa
+            </span>
+          </div>
+
+          <!-- User Gallery Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/HOMEPAGE.jpg', 'Trang Chủ Nền Tảng (Homepage)')">
+            <img src="assets/mockups/HOMEPAGE.jpg" alt="Trang Chủ Nền Tảng (Homepage)" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Trang Chủ Nền Tảng (Homepage)</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Giao diện trang chủ hiện đại với banner nông sản theo mùa, danh mục nổi bật, sản phẩm ưu đãi và cam kết chất lượng chuẩn vị.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>HOMEPAGE.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/HOMEPAGE.jpg', 'Trang Chủ Nền Tảng (Homepage)')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/ListProduct.jpg', 'Danh Sách & Bộ Lọc Sản Phẩm')">
+            <img src="assets/mockups/ListProduct.jpg" alt="Danh Sách & Bộ Lọc Sản Phẩm" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Danh Sách & Bộ Lọc Sản Phẩm</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Bộ lọc đa tiêu chí (danh mục rau củ quả, mức giá, chứng nhận VietGAP/GlobalGAP), sắp xếp thông minh và hiển thị thẻ sản phẩm.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>ListProduct.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/ListProduct.jpg', 'Danh Sách & Bộ Lọc Sản Phẩm')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/Header.jpg', 'Header Điều Hướng 2 Tầng')">
+            <img src="assets/mockups/Header.jpg" alt="Header Điều Hướng 2 Tầng" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Header Điều Hướng 2 Tầng</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Top-header tự động ẩn khi cuộn trang, Main-header cố định gồm logo thương hiệu, tìm kiếm thông minh, hotline và giỏ hàng nổi.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Header.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/Header.jpg', 'Header Điều Hướng 2 Tầng')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/Footer.jpg', 'Chân Trang Hệ Thống (Footer)')">
+            <img src="assets/mockups/Footer.jpg" alt="Chân Trang Hệ Thống (Footer)" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Chân Trang Hệ Thống (Footer)</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Thông tin liên hệ, giấy chứng nhận an toàn thực phẩm, chính sách đổi trả trong 24h, liên kết mạng xã hội và bản tin sống xanh.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Footer.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/Footer.jpg', 'Chân Trang Hệ Thống (Footer)')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/Veebot.jpg', 'Trợ Lý Ảo Chatbot (Veebot)')">
+            <img src="assets/mockups/Veebot.jpg" alt="Trợ Lý Ảo Chatbot (Veebot)" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Trợ Lý Ảo Chatbot (Veebot)</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Cửa sổ tương tác hỗ trợ khách hàng tự động: tư vấn dinh dưỡng, gợi ý thực đơn rau củ thanh nhiệt và giải đáp quy định giao nhận.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Veebot.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/Veebot.jpg', 'Trợ Lý Ảo Chatbot (Veebot)')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/CookBook.jpg', 'Sổ Tay Nấu Ăn (CookBook)')">
+            <img src="assets/wireframes/CookBook.jpg" alt="Sổ Tay Nấu Ăn (CookBook)" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Sổ Tay Nấu Ăn (CookBook)</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Tính năng ẩm thực hướng dẫn chế biến món ngon từ rau củ sạch kèm video và nút 'Thêm toàn bộ nguyên liệu vào giỏ hàng' chỉ với 1-click.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>CookBook.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/CookBook.jpg', 'Sổ Tay Nấu Ăn (CookBook)')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - GIỎ HÀNG.jpg', 'Giỏ Hàng Modal Trượt Phải')">
+            <img src="assets/wireframes/[USER] - GIỎ HÀNG.jpg" alt="Giỏ Hàng Modal Trượt Phải" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Giỏ Hàng Modal Trượt Phải</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Giỏ hàng trượt cạnh phải, kiểm tra tồn kho thời gian thực, tạm tính chi phí và thanh tiến độ thông báo mốc Miễn phí giao hàng 200k.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - GIỎ HÀNG.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - GIỎ HÀNG.jpg', 'Giỏ Hàng Modal Trượt Phải')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - ĐẶT HÀNG.jpg', 'Thông Tin Giao Hàng & Định Tuyến Kho')">
+            <img src="assets/wireframes/[USER] - ĐẶT HÀNG.jpg" alt="Thông Tin Giao Hàng & Định Tuyến Kho" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Thông Tin Giao Hàng & Định Tuyến Kho</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Form nhập thông tin người nhận, chọn nhanh địa chỉ từ sổ địa chỉ cá nhân và hệ thống tự động chọn kho hàng gần nhất.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - ĐẶT HÀNG.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - ĐẶT HÀNG.jpg', 'Thông Tin Giao Hàng & Định Tuyến Kho')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - ĐẶT HÀNG2.jpg', 'Xác Nhận Đơn Hàng & Cổng Thanh Toán')">
+            <img src="assets/wireframes/[USER] - ĐẶT HÀNG2.jpg" alt="Xác Nhận Đơn Hàng & Cổng Thanh Toán" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Xác Nhận Đơn Hàng & Cổng Thanh Toán</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Lựa chọn phương thức thanh toán linh hoạt: COD, Ví điện tử VNPAY/Momo, Thẻ ATM nội địa/Quốc tế với chuẩn bảo mật SSL 256-bit.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - ĐẶT HÀNG2.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - ĐẶT HÀNG2.jpg', 'Xác Nhận Đơn Hàng & Cổng Thanh Toán')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/Xuất hóa đơn.jpg', 'Tùy Chọn Xuất Hóa Đơn VAT Doanh Nghiệp')">
+            <img src="assets/wireframes/Xuất hóa đơn.jpg" alt="Tùy Chọn Xuất Hóa Đơn VAT Doanh Nghiệp" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Tùy Chọn Xuất Hóa Đơn VAT Doanh Nghiệp</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Checkbox và biểu mẫu nhập thông tin công ty (Tên doanh nghiệp, Mã số thuế, Email nhận hóa đơn điện tử GTGT hợp pháp).</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Xuất hóa đơn.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/Xuất hóa đơn.jpg', 'Tùy Chọn Xuất Hóa Đơn VAT Doanh Nghiệp')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/USER - SỔ ĐỊA CHỈ.jpg', 'Quản Lý Sổ Nhiều Địa Chỉ')">
+            <img src="assets/wireframes/USER - SỔ ĐỊA CHỈ.jpg" alt="Quản Lý Sổ Nhiều Địa Chỉ" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quản Lý Sổ Nhiều Địa Chỉ</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Lưu trữ nhiều địa chỉ giao hàng (Nhà riêng, Cơ quan), gắn nhãn và thiết lập địa chỉ mặc định để thanh toán nhanh 1-click.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>USER - SỔ ĐỊA CHỈ.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/USER - SỔ ĐỊA CHỈ.jpg', 'Quản Lý Sổ Nhiều Địa Chỉ')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/USER - QUẢN LÝ ĐƠN HÀNG.jpg', 'Theo Dõi Tiến Trình Đơn Hàng')">
+            <img src="assets/wireframes/USER - QUẢN LÝ ĐƠN HÀNG.jpg" alt="Theo Dõi Tiến Trình Đơn Hàng" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Theo Dõi Tiến Trình Đơn Hàng</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Theo dõi tình trạng đơn qua 5 trạng thái thời gian thực: Chờ xác nhận, Đang xử lý, Đang giao, Đã giao thành công, Đã hủy.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>USER - QUẢN LÝ ĐƠN HÀNG.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/USER - QUẢN LÝ ĐƠN HÀNG.jpg', 'Theo Dõi Tiến Trình Đơn Hàng')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/USER - QUẢN LÝ ĐỔI TRẢ.jpg', 'Quy Trình Quản Lý Đổi Trả')">
+            <img src="assets/wireframes/USER - QUẢN LÝ ĐỔI TRẢ.jpg" alt="Quy Trình Quản Lý Đổi Trả" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Trình Quản Lý Đổi Trả</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Biểu mẫu gửi yêu cầu đổi trả hàng trong vòng 24 giờ đối với nông sản tươi sống, 7 ngày với hàng đóng gói kèm ảnh chụp hư hỏng.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>USER - QUẢN LÝ ĐỔI TRẢ.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/USER - QUẢN LÝ ĐỔI TRẢ.jpg', 'Quy Trình Quản Lý Đổi Trả')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/POPUP - ĐÁNH GIÁ ĐƠN HÀNG.jpg', 'Đánh Giá & Phản Hồi Đơn Hàng')">
+            <img src="assets/wireframes/POPUP - ĐÁNH GIÁ ĐƠN HÀNG.jpg" alt="Đánh Giá & Phản Hồi Đơn Hàng" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Đánh Giá & Phản Hồi Đơn Hàng</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Chấm điểm xếp hạng 1–5 sao, gửi nhận xét trải nghiệm và hỗ trợ tải lên tối đa 5 hình ảnh thực tế sau khi nhận hàng.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>POPUP - ĐÁNH GIÁ ĐƠN HÀNG.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/POPUP - ĐÁNH GIÁ ĐƠN HÀNG.jpg', 'Đánh Giá & Phản Hồi Đơn Hàng')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - ĐĂNG KÝ.jpg', 'Đăng Ký Tài Khoản Xác Thực OTP')">
+            <img src="assets/wireframes/[USER] - ĐĂNG KÝ.jpg" alt="Đăng Ký Tài Khoản Xác Thực OTP" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Đăng Ký Tài Khoản Xác Thực OTP</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Luồng tạo tài khoản bảo mật bằng số điện thoại/email với mã OTP xác minh trước khi kích hoạt tài khoản chính thức.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - ĐĂNG KÝ.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - ĐĂNG KÝ.jpg', 'Đăng Ký Tài Khoản Xác Thực OTP')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - ĐĂNG NHẬP.jpg', 'Cổng Đăng Nhập Người Dùng')">
+            <img src="assets/wireframes/[USER] - ĐĂNG NHẬP.jpg" alt="Cổng Đăng Nhập Người Dùng" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Cổng Đăng Nhập Người Dùng</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Đăng nhập nhanh với số điện thoại/email và mật khẩu được mã hóa an toàn bằng thuật toán PasswordHash.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - ĐĂNG NHẬP.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - ĐĂNG NHẬP.jpg', 'Cổng Đăng Nhập Người Dùng')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - QUÊN MẬT KHẨU (1).jpg', 'Khôi Phục Mật Khẩu Qua OTP')">
+            <img src="assets/wireframes/[USER] - QUÊN MẬT KHẨU (1).jpg" alt="Khôi Phục Mật Khẩu Qua OTP" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Khôi Phục Mật Khẩu Qua OTP</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Quy trình gửi mã xác thực OTP qua SMS/Email giúp người dùng đặt lại mật khẩu an toàn và tiện lợi.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - QUÊN MẬT KHẨU (1).jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - QUÊN MẬT KHẨU (1).jpg', 'Khôi Phục Mật Khẩu Qua OTP')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/USER - BLOGS.jpg', 'Chuyên Trang Bài Viết Sống Xanh')">
+            <img src="assets/wireframes/USER - BLOGS.jpg" alt="Chuyên Trang Bài Viết Sống Xanh" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Chuyên Trang Bài Viết Sống Xanh</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Tổng hợp các bài viết chia sẻ kiến thức dinh dưỡng, mẹo bảo quản rau củ hữu cơ và câu chuyện nông nghiệp bền vững.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>USER - BLOGS.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/USER - BLOGS.jpg', 'Chuyên Trang Bài Viết Sống Xanh')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - BLOG DETAIL.jpg', 'Chi Tiết Bài Viết & Sản Phẩm Liên Quan')">
+            <img src="assets/wireframes/[USER] - BLOG DETAIL.jpg" alt="Chi Tiết Bài Viết & Sản Phẩm Liên Quan" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Chi Tiết Bài Viết & Sản Phẩm Liên Quan</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Nội dung bài viết chuẩn SEO, tích hợp chia sẻ mạng xã hội và khối gợi ý sản phẩm nông sản có liên quan trực tiếp trong bài.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - BLOG DETAIL.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - BLOG DETAIL.jpg', 'Chi Tiết Bài Viết & Sản Phẩm Liên Quan')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - CHI TIẾT SẢN PHẨM (1).jpg', 'Chi Tiết Sản Phẩm & Chứng Nhận')">
+            <img src="assets/wireframes/[USER] - CHI TIẾT SẢN PHẨM (1).jpg" alt="Chi Tiết Sản Phẩm & Chứng Nhận" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Chi Tiết Sản Phẩm & Chứng Nhận</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Hình ảnh phóng to, thông tin xuất xứ nông trại, chứng chỉ VietGAP/GlobalGAP, đơn vị tính, giá bán và hướng dẫn bảo quản.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - CHI TIẾT SẢN PHẨM (1).jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - CHI TIẾT SẢN PHẨM (1).jpg', 'Chi Tiết Sản Phẩm & Chứng Nhận')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/wireframes/[USER] - CHI TIẾT SẢN PHẨM (2).jpg', 'Đánh Giá Khách Hàng & Hỏi Đáp Sản Phẩm')">
+            <img src="assets/wireframes/[USER] - CHI TIẾT SẢN PHẨM (2).jpg" alt="Đánh Giá Khách Hàng & Hỏi Đáp Sản Phẩm" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Wireframes
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Đánh Giá Khách Hàng & Hỏi Đáp Sản Phẩm</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Danh sách phản hồi thực tế từ khách hàng đã mua, điểm sao trung bình và mục đặt câu hỏi trực tiếp cho đội ngũ tư vấn.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>[USER] - CHI TIẾT SẢN PHẨM (2).jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/wireframes/[USER] - CHI TIẾT SẢN PHẨM (2).jpg', 'Đánh Giá Khách Hàng & Hỏi Đáp Sản Phẩm')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+          </div>
+        </div>
+
+        <!-- 5.3 Thư Viện Wireframes & Mockups Quản Trị -->
+        <div id="uiux-admin-screens" class="scroll-mt-24 bg-white rounded-2xl p-6 sm:p-8 border border-vgray-200 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-vgray-200 pb-4">
+            <div>
+              <h3 class="font-bold text-lg text-vgray-900 flex items-center space-x-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-blue-600"></i>
+                <span>5.3 Thư Viện 8 Màn Hình Giao Diện Quản Trị Hệ Thống (Admin Mockups)</span>
+              </h3>
+              <p class="text-xs text-vgray-500 mt-1">Giao diện điều hành hệ thống: Dashboard doanh thu, Tạo đơn Hotline, Quản lý tồn kho FEFO, Phân nhóm hội viên, Voucher engine.</p>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 bg-blue-100 text-blue-800 rounded-full border border-blue-300 self-start sm:self-auto">
+              8 Phân Hệ Quản Trị
+            </span>
+          </div>
+
+          <!-- Admin Gallery Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/Admin2.jpg', 'Bảng Điều Hành Tổng Quan (Dashboard)')">
+            <img src="assets/mockups/Admin2.jpg" alt="Bảng Điều Hành Tổng Quan (Dashboard)" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Bảng Điều Hành Tổng Quan (Dashboard)</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Thống kê doanh thu theo thời gian thực, tổng số đơn hàng mới, biểu đồ tăng trưởng và cảnh báo lượng đơn chờ xử lý.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Admin2.jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/Admin2.jpg', 'Bảng Điều Hành Tổng Quan (Dashboard)')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/mockups/Admin2(1).jpg', 'Quản Lý Báo Cáo Sản Phẩm & Tồn Kho')">
+            <img src="assets/mockups/Admin2(1).jpg" alt="Quản Lý Báo Cáo Sản Phẩm & Tồn Kho" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Mockups
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quản Lý Báo Cáo Sản Phẩm & Tồn Kho</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Danh sách sản phẩm bán chạy nhất theo tuần/tháng, cảnh báo tồn kho dưới ngưỡng an toàn và theo dõi doanh số từng mặt hàng.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Admin2(1).jpg</span>
+              </span>
+              <button onclick="openLightbox('assets/mockups/Admin2(1).jpg', 'Quản Lý Báo Cáo Sản Phẩm & Tồn Kho')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/diagrams/page_46_2.png', 'Kiến Trúc Sitemap Phân Hệ Quản Trị')">
+            <img src="assets/diagrams/page_46_2.png" alt="Kiến Trúc Sitemap Phân Hệ Quản Trị" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Diagrams
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Kiến Trúc Sitemap Phân Hệ Quản Trị</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Sơ đồ kiến trúc phân rã 7 phân hệ quản trị: Dashboard, Sản phẩm/Tồn kho, Đơn hàng, Khách hàng, CMS, Khuyến mãi, Tư vấn.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>page_46_2.png</span>
+              </span>
+              <button onclick="openLightbox('assets/diagrams/page_46_2.png', 'Kiến Trúc Sitemap Phân Hệ Quản Trị')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/diagrams/page_66_2.png', 'Quy Trình Đăng Nhập & Phân Quyền Quản Trị')">
+            <img src="assets/diagrams/page_66_2.png" alt="Quy Trình Đăng Nhập & Phân Quyền Quản Trị" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Diagrams
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Trình Đăng Nhập & Phân Quyền Quản Trị</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Cổng đăng nhập quản trị viên độc lập, kiểm tra thông tin và phân quyền thao tác theo vai trò nhân sự trong hệ thống.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>page_66_2.png</span>
+              </span>
+              <button onclick="openLightbox('assets/diagrams/page_66_2.png', 'Quy Trình Đăng Nhập & Phân Quyền Quản Trị')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/diagrams/page_68_2.png', 'Quy Trình Quản Trị Sản Phẩm & Tồn Kho FEFO')">
+            <img src="assets/diagrams/page_68_2.png" alt="Quy Trình Quản Trị Sản Phẩm & Tồn Kho FEFO" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Diagrams
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Trình Quản Trị Sản Phẩm & Tồn Kho FEFO</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Luồng thao tác thêm mới, sửa, cập nhật giá bán, số lượng tồn kho và ràng buộc nghiêm ngặt không xóa sản phẩm trong đơn chờ.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>page_68_2.png</span>
+              </span>
+              <button onclick="openLightbox('assets/diagrams/page_68_2.png', 'Quy Trình Quản Trị Sản Phẩm & Tồn Kho FEFO')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/diagrams/page_70_2.png', 'Quy Trình Xử Lý Đơn Hàng & Hotline')">
+            <img src="assets/diagrams/page_70_2.png" alt="Quy Trình Xử Lý Đơn Hàng & Hotline" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Diagrams
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Trình Xử Lý Đơn Hàng & Hotline</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Tiếp nhận đơn đặt hàng, tính năng tạo đơn hộ qua Hotline/Email, chuyển trạng thái đóng gói, in phiếu giao hàng và hóa đơn.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>page_70_2.png</span>
+              </span>
+              <button onclick="openLightbox('assets/diagrams/page_70_2.png', 'Quy Trình Xử Lý Đơn Hàng & Hotline')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/diagrams/page_72_2.png', 'Quy Trình Phân Hạng Hội Viên Khách Hàng')">
+            <img src="assets/diagrams/page_72_2.png" alt="Quy Trình Phân Hạng Hội Viên Khách Hàng" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Diagrams
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Trình Phân Hạng Hội Viên Khách Hàng</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Theo dõi lịch sử chi tiêu, tự động tính tổng tiền tích lũy và nâng hạng hội viên thành viên: Regular, VIP, Đồng, Bạc, Vàng, Bạch Kim.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>page_72_2.png</span>
+              </span>
+              <button onclick="openLightbox('assets/diagrams/page_72_2.png', 'Quy Trình Phân Hạng Hội Viên Khách Hàng')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="group bg-white rounded-xl border border-vgray-200 overflow-hidden shadow-sm hover:shadow-md transition card-hover flex flex-col">
+          <div class="relative bg-vgray-100 overflow-hidden cursor-pointer h-52 flex items-center justify-center p-2" onclick="openLightbox('assets/diagrams/page_75_2.png', 'Quy Trình Cấu Hình Khuyến Mãi Nâng Cao')">
+            <img src="assets/diagrams/page_75_2.png" alt="Quy Trình Cấu Hình Khuyến Mãi Nâng Cao" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white space-x-2">
+              <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              <span class="text-xs font-semibold">Xem phóng to</span>
+            </div>
+            <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-white/90 text-vgray-800 rounded shadow-sm">
+              Diagrams
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="font-bold text-sm text-vgray-900 group-hover:text-vgreen-700 transition line-clamp-1">Quy Trình Cấu Hình Khuyến Mãi Nâng Cao</h5>
+              <p class="text-xs text-vgray-600 mt-1 line-clamp-2 leading-relaxed">Thiết lập mã voucher ưu đãi, áp dụng giảm theo % hoặc số tiền cố định, giới hạn lượt dùng, đơn hàng tối thiểu và mức trần giảm giá.</p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-vgray-100 flex items-center justify-between text-[11px] text-vgreen-700 font-medium">
+              <span class="flex items-center space-x-1">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>page_75_2.png</span>
+              </span>
+              <button onclick="openLightbox('assets/diagrams/page_75_2.png', 'Quy Trình Cấu Hình Khuyến Mãi Nâng Cao')" class="hover:underline flex items-center space-x-0.5">
+                <span>Chi tiết</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-vgray-900 text-white mt-24 border-t border-vgray-800">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="space-y-3">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-9 h-9 rounded-lg bg-vgreen-600 flex items-center justify-center text-white">
+                <i data-lucide="sprout" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xl font-bold tracking-tight text-white">VGreen Platform</span>
+            </div>
+            <p class="text-xs text-vgray-400 max-w-sm leading-relaxed">
+              Hệ sinh thái số hóa nông sản sạch chuẩn vị ngon từ vườn đến bàn ăn đô thị. Nền tảng kết nối trực tiếp nông hộ và người tiêu dùng.
+            </p>
+            <div class="text-xs text-vgreen-400 pt-2 font-mono flex items-center space-x-2">
+              <i data-lucide="globe" class="w-4 h-4"></i>
+              <a href="https://vgreenadmin.vercel.app/home" target="_blank" class="hover:underline">https://vgreenadmin.vercel.app/home</a>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="text-xs font-bold uppercase tracking-wider text-vgold-400 mb-3">Tài Liệu Đặc Tả</h5>
+            <ul class="space-y-2 text-xs text-vgray-400">
+              <li><a href="#brd" class="hover:text-white transition">1. Yêu Cầu Kinh Doanh (BRD)</a></li>
+              <li><a href="#srs" class="hover:text-white transition">2. Kiến Trúc & Quy Trình (SRS / FSD)</a></li>
+              <li><a href="#fr" class="hover:text-white transition">3. Yêu Cầu Chức Năng (FR 01–20)</a></li>
+              <li><a href="#nfr" class="hover:text-white transition">4. Tiêu Chuẩn Kỹ Thuật (NFR)</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="text-xs font-bold uppercase tracking-wider text-vgold-400 mb-3">Trải Nghiệm & Thiết Kế</h5>
+            <ul class="space-y-2 text-xs text-vgray-400">
+              <li><a href="#uiux-design-system" class="hover:text-white transition">5.1 Design System & Typography</a></li>
+              <li><a href="#uiux-user-screens" class="hover:text-white transition">5.2 19 Màn Hình Khách Hàng</a></li>
+              <li><a href="#uiux-admin-screens" class="hover:text-white transition">5.3 8 Màn Hình Quản Trị</a></li>
+              <li class="pt-2"><a href="https://vgreenadmin.vercel.app/home" target="_blank" class="inline-flex items-center space-x-1 px-3 py-1 bg-vgreen-700 hover:bg-vgreen-600 rounded text-white font-semibold transition"><span>Mở Website Trực Tuyến</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-vgray-800 text-center text-xs text-vgray-500">
+          &copy; 2026 VGreen Platform Documentation Portal • Slogan: "Chuẩn vị xanh - Trọn vị ngon". All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ================= LIGHTBOX MODAL ================= -->
+  <div id="imageLightbox" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="relative max-w-5xl w-full max-h-[92vh] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col" onclick="event.stopPropagation()">
+      <div class="px-5 py-3.5 bg-vgray-900 text-white flex items-center justify-between">
+        <h4 id="lightboxTitle" class="font-bold text-sm text-vgreen-300">Chi tiết hình ảnh</h4>
+        <button onclick="closeLightbox()" class="text-vgray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-4 bg-vgray-100 flex-1 overflow-auto flex items-center justify-center min-h-[300px] max-h-[80vh]">
+        <img id="lightboxImage" src="" alt="" class="max-h-full max-w-full object-contain rounded shadow">
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    lucide.createIcons();
+
+    // Toggle Mobile Sidebar
+    function toggleSidebar() {
+      const sb = document.getElementById('mainSidebar');
+      const backdrop = document.getElementById('mobileSidebarBackdrop');
+      if (sb.classList.contains('-translate-x-full')) {
+        sb.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        sb.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    // Close sidebar on mobile when a link is clicked
+    document.querySelectorAll('.sidebar-link, aside a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024) {
+          toggleSidebar();
+        }
+      });
+    });
+
+    // Lightbox Modal functions
+    function openLightbox(src, title) {
+      const modal = document.getElementById('imageLightbox');
+      const img = document.getElementById('lightboxImage');
+      const titleEl = document.getElementById('lightboxTitle');
+      img.src = src;
+      img.alt = title;
+      titleEl.innerText = title;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightbox');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Search filter
+    function filterDocsContent(query) {
+      const q = query.toLowerCase().trim();
+      const cards = document.querySelectorAll('main section > div');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // ScrollSpy for Sidebar Links
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const sidebarLinks = document.querySelectorAll('aside a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      sidebarLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
